@@ -4,7 +4,18 @@ be-sharing is one decorator among a triumvirate of decorators that rollup to [be
 
 ## Lingo
 
-In the example below, we provide multiple examples of saying the same thing.
+In the example below, we provide multiple examples of be-sharing expressions.
+
+```html
+<div be-scoped='{
+    "count": 30,
+}'>
+    <button></button>
+    <div></div>
+    <script nomodule be-sharing="count to button element as text content">
+    </script>
+</div>
+```
 
 ```html
 <div be-scoped='{
@@ -15,6 +26,7 @@ In the example below, we provide multiple examples of saying the same thing.
     <div></div>
     <script nomodule be-sharing='{
         "observe": "$.beScoped",
+        "share$": ["countToButtonAsTextContent"],
         "shareCountToButtonAs": "textContent",
         "shareCountAndStatusTo": [{
             "div": ["status", " (", "count", " times)"]
