@@ -12,8 +12,7 @@ In the example below, we provide multiple examples of be-sharing expressions.
 }'>
     <button></button>
     <div></div>
-    <script nomodule be-sharing="count to button element as text content">
-    </script>
+    <script be-sharing="count to button element as text content"></script>
 </div>
 ```
 
@@ -24,7 +23,7 @@ In the example below, we provide multiple examples of be-sharing expressions.
 }'>
     <button></button>
     <div></div>
-    <script nomodule be-sharing='{
+    <script be-sharing='{
         "observe": "$.beScoped",
         "share$": ["countToButtonAsTextContent"],
         "shareCountToButtonAs": "textContent",
