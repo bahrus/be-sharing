@@ -14,6 +14,7 @@ In the example below, we provide multiple examples of be-sharing expressions.
     <div></div>
     <script be-sharing='
         Observe $:beScoped.
+        Set sharing scope to parent or root node.
         Share count to button element as text content.'>
     </script>
 </div>
