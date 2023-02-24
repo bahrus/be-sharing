@@ -13,8 +13,9 @@ In the example below, we provide multiple examples of be-sharing expressions.
     <button></button>
     <div></div>
     <script be-sharing='
-        {"observe": "$.beScoped"}
-        Share count to button element as text content.'></script>
+        Observe $:beScoped.
+        Share count to button element as text content.'>
+    </script>
 </div>
 ```
 
