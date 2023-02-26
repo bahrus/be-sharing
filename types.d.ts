@@ -22,13 +22,24 @@ export type SetStatement =
     |   `HomeInOnPathTo${homeInOnPath}`
     |   `SharingRealmTo${sharingRealm}`;
 
+export interface ShareTransform {
+    props: string[],
+    transform: Matches
+}
 export interface CamelConfig {
-    Set: SetStatement[],
+    Set?: SetStatement[],
     Share?: `${string}To${camelQry}As${string}`[],
     [key: `share${propName}To`]: Matches,
-    share: {
-        props: string[],
-        transform: Matches
-    }[]
+    share?: ShareTransform | ShareTransform[],
+    observingRealm?: Scope,
+    homeInOnPath?: string,
+    sharingRealm?: Scope,
+}
+
+export interface CanonicalConfig{
+    observingRealm: Scope,
+    homeInOnPath: string,
+    sharingRealm: Scope,
+    share: ShareTransform[],
 }
 
