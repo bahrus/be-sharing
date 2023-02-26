@@ -22,13 +22,17 @@ export type SetStatement =
     |   `HomeInOnPathTo${homeInOnPath}`
     |   `SharingRealmTo${sharingRealm}`;
 
+export type ShareStatement = 
+    | `${string}To${camelQry}As${string}`
+    | `${string}To${camelQry}`;
+
 export interface ShareTransform {
     props: string[],
     transform: Matches
 }
 export interface CamelConfig {
     Set?: SetStatement[],
-    Share?: `${string}To${camelQry}As${string}`[],
+    Share?: ShareStatement[],
     [key: `share${propName}To`]: Matches,
     share?: ShareTransform | ShareTransform[],
     observingRealm?: Scope,
