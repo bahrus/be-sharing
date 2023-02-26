@@ -25,6 +25,10 @@ export type SetStatement =
 export interface CamelConfig {
     Set: SetStatement[],
     Share?: `${string}To${camelQry}As${string}`[],
-    [key: `share${propName}To`]: Matches
+    [key: `share${propName}To`]: Matches,
+    share: {
+        props: string[],
+        transform: Matches
+    }[]
 }
 
