@@ -18,7 +18,7 @@ In the example below, we provide multiple examples of be-sharing expressions.
     <script be-sharing='
         {"shareCountAndStatusTo":  [{"div": ["status", " (", "count", " times)"]}]}
         Set observing realm to parent. //this is the default.
-        Set home in on path to be scoped:scope.  //not set by default.
+        Set home in on path to be scoped:scope.  //not set by default.  Special intervention for properties that start with be[space]
         Set sharing realm to parent. //this is the default.
         Share count to button element as text content.'>
     </script>
