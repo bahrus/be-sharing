@@ -1,31 +1,24 @@
-import {define, BeDecoratedProps} from 'be-decorated/DE.js';
-import {register} from "be-hive/register.js";
-import {Actions, PP, Proxy, PPP, CanonicalConfig} from './types';
-
-export class BeSharing extends EventTarget implements Actions{
-    async camelToCanonical(pp: PP): Promise<PPP> {
-        const {camelConfig} = pp;
-        const {Set} = camelConfig!;
-        const {parseSet} = await import('be-decorated/cpu.js');
+import { define } from 'be-decorated/DE.js';
+import { register } from "be-hive/register.js";
+export class BeSharing extends EventTarget {
+    async camelToCanonical(pp) {
+        const { camelConfig } = pp;
+        const { Set } = camelConfig;
+        const { parseSet } = await import('be-decorated/cpu.js');
         parseSet(Set, camelConfig);
-
-        const canonicalConfig: CanonicalConfig = {
-        };
+        const canonicalConfig = {};
         return {
             canonicalConfig
-        } as PPP;
+        };
     }
-
-    async onCanonical(pp: PP, mold: Partial<PP>): Promise<PPP> {
+    async onCanonical(pp, mold) {
         return mold;
     }
 }
-
 const tagName = 'be-sharing';
 const ifWantsToBe = 'sharing';
 const upgrade = 'script';
-
-define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
+define({
     config: {
         tagName,
         propDefaults: {
@@ -43,13 +36,11 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
                 returnObjMold: {
                     resolved: true,
                 }
-            }            
+            }
         }
-
     },
     complexPropDefaults: {
         controller: BeSharing
     }
 });
-
 register(ifWantsToBe, upgrade, tagName);
