@@ -9,7 +9,14 @@ export class BeSharing extends EventTarget implements Actions{
         const {parseSet} = await import('be-decorated/cpu.js');
         parseSet(Set, camelConfig);
 
+        let {homeInOnPath, observingRealm, sharingRealm} = camelConfig!;
+        observingRealm =  observingRealm || 'parent';
+        sharingRealm = sharingRealm || observingRealm;
         const canonicalConfig: CanonicalConfig = {
+            homeInOnPath,
+            observingRealm,
+            sharingRealm,
+            share: []
         };
         return {
             canonicalConfig
