@@ -1,10 +1,10 @@
-# be-sharing [TODO]
+# be-sharing [WIP]
 
 be-sharing is one decorator among a triumvirate of decorators that rollup to [be-hydrated](https://github.com/bahrus/be-hydrated).
 
-## Hemingway Lingo
+## Hemingway Notation
 
-In the example below, we provide multiple examples of be-sharing expressions.
+The following example demonstrates use of Hemingway Notation as much as possible, but also JSON as needs warrant.
 
 ```html
 <div be-scoped='{
@@ -31,7 +31,7 @@ In the example below, we provide multiple examples of be-sharing expressions.
 </div>
 ```
 
-## JSON lingo
+## JavaScriptObjectNotation
 
 ```html
 <div be-scoped='{
