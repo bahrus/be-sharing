@@ -16,7 +16,11 @@ In the example below, we provide multiple examples of be-sharing expressions.
     <div></div>
     <span></span>
     <script be-sharing='
-        {"shareCountAndStatusTo":  [{"div": ["status", " (", "count", " times)"]}]}
+        {        
+            "shareExpressions":{
+                "shareCountAndStatusTo":  [{"div": ["status", " (", "count", " times)"]}]
+            }
+        }
         Set observing realm to parent. //this is the default.
         Set home in on path to be scoped:scope.  //not set by default.  Special intervention for properties that start with be[space]
         Set sharing realm to parent. //this is the default.
@@ -40,7 +44,9 @@ In the example below, we provide multiple examples of be-sharing expressions.
         "observingRealm": "parent",
         "homeInOnPath": "beDecorated.beScoped.scope",
         "sharingRealm": "parent",
-        "shareCountAndStatusTo":  [{"div": ["status", " (", "count", " times)"]}],
+        "shareExpressions":{
+            "shareCountAndStatusTo":  [{"div": ["status", " (", "count", " times)"]}]
+        },
         "Share": ["countToButtonEAsTextContent"],
         "share": [{
             "props": ["propWithAndAndToInName"],

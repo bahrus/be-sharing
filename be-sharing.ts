@@ -1,13 +1,17 @@
 import {define, BeDecoratedProps} from 'be-decorated/DE.js';
 import {register} from "be-hive/register.js";
-import {Actions, PP, Proxy, PPP, CanonicalConfig} from './types';
+import { Matches } from 'trans-render/lib/types';
+import {Actions, PP, Proxy, PPP, CanonicalConfig, DynamicShareKey} from './types';
 
 export class BeSharing extends EventTarget implements Actions{
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
         const {Set} = camelConfig!;
-        const {parseSet} = await import('be-decorated/cpu.js');
-        parseSet(Set, camelConfig);
+        if(Set !== undefined){
+            const {parseSet} = await import('be-decorated/cpu.js');
+            parseSet(Set, camelConfig);
+        }
+
 
         let {homeInOnPath, observingRealm, sharingRealm} = camelConfig!;
         observingRealm =  observingRealm || 'parent';
@@ -18,6 +22,46 @@ export class BeSharing extends EventTarget implements Actions{
             sharingRealm,
             share: []
         };
+        const {share} = canonicalConfig;
+        const {Share, shareExpressions} = camelConfig!;
+        if(Share !== undefined){
+            const {tryParse} = await import('be-decorated/cpu.js');
+            for(const key of Share){
+                const spcqdp = tryParse(key, reSrcPropToCamelQryAsDomProp) as SrcPropCamelQryDomProp | null;
+                if(spcqdp != null){
+                    share.push({
+                        props: [spcqdp.srcProp],
+                        transform: {
+                            [spcqdp.camelQry]: {[spcqdp.domProp]: spcqdp.srcProp}
+                        } as any as Matches,
+                    });
+                    continue;
+                }
+                const spcq = tryParse(key, reSrcPropToCamelQry) as SrcPropCamelQry;
+                if(spcq !== null){
+                    share.push({
+                        props: [spcq.srcProp],
+                        transform: {
+                            [spcq.camelQry]: spcq.srcProp
+                        }
+                    });
+                    continue;
+                }
+            }
+        }
+        if(shareExpressions !== undefined){
+            const {tryParse} = await import('be-decorated/cpu.js');
+            for(const key in shareExpressions){
+                const sp = tryParse(key, reSrcPropsTo) as SrcProps;
+                if(sp !== null){
+                    share.push({
+                        props: sp.srcProps.split(reAndSplit),
+                        transform: shareExpressions[key as DynamicShareKey] as any as Matches
+                    })
+                }
+            }
+        }
+
         return {
             canonicalConfig
         } as PPP;
@@ -27,6 +71,27 @@ export class BeSharing extends EventTarget implements Actions{
         return mold;
     }
 }
+
+interface SrcProps {
+    srcProps: string;
+}
+
+const reSrcPropsTo = /^share(?<srcProps>\w+)(?<!\\)To/;
+
+const reAndSplit = /(?<!\\)And/g;
+
+const reSrcPropToCamelQry = /^share(?<srcProp>\w+)(?<!\\)To(?<camelQry>\w+)/;
+
+interface SrcPropCamelQry {
+    srcProp: string,
+    camelQry: string,
+    
+}
+
+interface SrcPropCamelQryDomProp extends SrcPropCamelQry {
+    domProp:string,
+}
+const reSrcPropToCamelQryAsDomProp = /^share(?<srcProp>\w+)(?<!\\)To(?<camelQry>\w+)(?<!\\)As(?<domProp>\w+)/;
 
 const tagName = 'be-sharing';
 const ifWantsToBe = 'sharing';

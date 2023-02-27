@@ -26,6 +26,7 @@ export type ShareStatement =
     | `${string}To${camelQry}As${string}`
     | `${string}To${camelQry}`;
 
+export type DynamicShareKey = `share${propName}To`
 export interface ShareTransform {
     props: string[],
     transform: Matches
@@ -33,11 +34,13 @@ export interface ShareTransform {
 export interface CamelConfig {
     Set?: SetStatement[],
     Share?: ShareStatement[],
-    [key: `share${propName}To`]: Matches,
     share?: ShareTransform | ShareTransform[],
     observingRealm?: Scope,
     homeInOnPath?: string,
     sharingRealm?: Scope,
+    shareExpressions?: {
+        [key: DynamicShareKey]: Matches,
+    }
 }
 
 export interface CanonicalConfig{
