@@ -54,8 +54,9 @@ export class BeSharing extends EventTarget implements Actions{
             for(const key in shareExpressions){
                 const sp = tryParse(key, reSrcPropsTo) as SrcProps;
                 if(sp !== null){
+                    const {lc} = await import('be-decorated/cpu.js');
                     share.push({
-                        props: sp.srcProps.split(reAndSplit),
+                        props: sp.srcProps.split(reAndSplit).map(s => lc(s)),
                         transform: shareExpressions[key as DynamicShareKey] as any as Matches
                     })
                 }
