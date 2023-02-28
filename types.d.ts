@@ -46,6 +46,7 @@ export interface CamelConfig {
 export interface CanonicalConfig{
     observingRealm: Scope,
     homeInOnPath?: string,
+    homeInOnResolvedEventName?: string,
     sharingRealm: Scope,
     share: ShareTransform[],
 }

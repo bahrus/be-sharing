@@ -11,8 +11,23 @@ export class BeSharing extends EventTarget {
         let { homeInOnPath, observingRealm, sharingRealm } = camelConfig;
         observingRealm = observingRealm || 'parent';
         sharingRealm = sharingRealm || observingRealm;
+        let homeInOnResolvedEventName = undefined;
+        if (homeInOnPath !== undefined) {
+            const split = homeInOnPath.split('.');
+            if (split.length > 1) {
+                const { camelToLisp } = await import('trans-render/lib/camelToLisp.js');
+                const camelSplit = split.map(s => camelToLisp(s));
+                if (camelSplit[0].startsWith('be-')) {
+                    camelSplit[0] = camelSplit[0].replace('be-', '');
+                    const { lc } = await import('be-decorated/cpu.js');
+                    homeInOnPath = 'beDecorated.' + lc(homeInOnPath.replace('be', ''));
+                    homeInOnResolvedEventName = 'be-decorated.' + camelSplit.join('.');
+                }
+            }
+        }
         const canonicalConfig = {
             homeInOnPath,
+            homeInOnResolvedEventName,
             observingRealm,
             sharingRealm,
             share: []
