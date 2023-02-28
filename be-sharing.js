@@ -16,12 +16,13 @@ export class BeSharing extends EventTarget {
             const split = homeInOnPath.split('.');
             if (split.length > 1) {
                 const { camelToLisp } = await import('trans-render/lib/camelToLisp.js');
-                const camelSplit = split.map(s => camelToLisp(s));
-                if (camelSplit[0].startsWith('be-')) {
-                    camelSplit[0] = camelSplit[0].replace('be-', '');
+                //const camelSplit = [camelToLisp(split[0]), camelToLisp(split[1])]; // split.map(s => camelToLisp(s));
+                let firstTokenCamel = camelToLisp(split[0]);
+                if (firstTokenCamel.startsWith('be-')) {
+                    firstTokenCamel = firstTokenCamel.replace('be-', '');
                     const { lc } = await import('be-decorated/cpu.js');
                     homeInOnPath = 'beDecorated.' + lc(homeInOnPath.replace('be', ''));
-                    homeInOnResolvedEventName = 'be-decorated.' + camelSplit.join('.');
+                    homeInOnResolvedEventName = 'be-decorated.' + firstTokenCamel + '.resolved';
                 }
             }
         }
