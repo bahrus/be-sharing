@@ -64,10 +64,10 @@ export class BeSharing extends EventTarget {
         return mold;
     }
 }
-const reSrcPropsTo = /^share(?<srcProps>\w+)(?<!\\)To/;
+const reSrcPropsTo = /^(?<srcProps>[\w\\]+)(?<!\\)To/;
 const reAndSplit = /(?<!\\)And/g;
-const reSrcPropToCamelQry = /^share(?<srcProp>\w+)(?<!\\)To(?<camelQry>\w+)/;
-const reSrcPropToCamelQryAsDomProp = /^share(?<srcProp>\w+)(?<!\\)To(?<camelQry>\w+)(?<!\\)As(?<domProp>\w+)/;
+const reSrcPropToCamelQry = /^(?<srcProp>[\w\\]+)(?<!\\)To(?<camelQry>\w+)/;
+const reSrcPropToCamelQryAsDomProp = /^(?<srcProp>[\w\\]+)(?<!\\)To(?<camelQry>\w+)(?<!\\)As(?<domProp>\w+)/;
 const tagName = 'be-sharing';
 const ifWantsToBe = 'sharing';
 const upgrade = 'script';
@@ -81,6 +81,7 @@ define({
             virtualProps: ['camelConfig', 'canonicalConfig'],
             primaryProp: 'camelConfig',
             parseAndCamelize: true,
+            primaryPropReq: true,
         },
         actions: {
             camelToCanonical: 'camelConfig',

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div be-scoped='{
+        "count": 30,
+        "status": "Logged in",
+        "propWithAndAndToInName": "hello"
+    }'>
+        <button></button>
+        <div></div>
+        <span></span>
+        <script be-sharing='
+            {        
+                "shareExpressions":{
+                    "shareCountAndStatusTo":  [{"div": ["status", " (", "count", " times)"]}]
+                }
+            }
+            Set observing realm to parent. //this is the default.
+            Set home in on path to be scoped:scope.  //not set by default.  //Special intervention for properties that start with be[space].
+            Set sharing realm to parent. //this is the default.
+            Share count to button element as text content.
+            Share prop with \and \and \to in name to span element.
+        '>
+        </script>
+        <script type=importmap>
+            {
+                "imports": {
+                    "be-decorated/": "../be-decorated/",
+                    "be-hive/": "../node_modules/be-hive/",
+                    "trans-render/": "../trans-render/"
+                }
+            }
+        </script>
+        <script type=module>
+            import '../be-sharing.js';
+        </script>
+    </div>
+</body>
+</html>

@@ -76,11 +76,11 @@ interface SrcProps {
     srcProps: string;
 }
 
-const reSrcPropsTo = /^share(?<srcProps>\w+)(?<!\\)To/;
+const reSrcPropsTo = /^(?<srcProps>[\w\\]+)(?<!\\)To/;
 
 const reAndSplit = /(?<!\\)And/g;
 
-const reSrcPropToCamelQry = /^share(?<srcProp>\w+)(?<!\\)To(?<camelQry>\w+)/;
+const reSrcPropToCamelQry = /^(?<srcProp>[\w\\]+)(?<!\\)To(?<camelQry>\w+)/;
 
 interface SrcPropCamelQry {
     srcProp: string,
@@ -91,7 +91,7 @@ interface SrcPropCamelQry {
 interface SrcPropCamelQryDomProp extends SrcPropCamelQry {
     domProp:string,
 }
-const reSrcPropToCamelQryAsDomProp = /^share(?<srcProp>\w+)(?<!\\)To(?<camelQry>\w+)(?<!\\)As(?<domProp>\w+)/;
+const reSrcPropToCamelQryAsDomProp = /^(?<srcProp>[\w\\]+)(?<!\\)To(?<camelQry>\w+)(?<!\\)As(?<domProp>\w+)/;
 
 const tagName = 'be-sharing';
 const ifWantsToBe = 'sharing';
@@ -107,6 +107,7 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
             virtualProps: ['camelConfig', 'canonicalConfig'],
             primaryProp: 'camelConfig',
             parseAndCamelize: true,
+            primaryPropReq: true,
         },
         actions: {
             camelToCanonical: 'camelConfig',
