@@ -13,12 +13,14 @@
         "propWithAndAndToInName": "hello"
     }'>
         <button></button>
-        <div></div>
+        <div class=inner></div>
         <span></span>
         <script be-sharing='
             {        
                 "shareExpressions":{
-                    "shareCountAndStatusTo":  [{"div": ["status", " (", "count", " times)"]}]
+                    "shareCountAndStatusTo":  {
+                        "innerC": ["", "status", " (", "count", " times)"]
+                    }
                 }
             }
             Set observing realm to parent. //this is the default.
