@@ -21,7 +21,7 @@ export class BeSharing extends EventTarget {
                 if (firstTokenCamel.startsWith('be-')) {
                     firstTokenCamel = firstTokenCamel.replace('be-', '');
                     const { lc } = await import('be-decorated/cpu.js');
-                    homeInOnPath = 'beDecorated.' + lc(homeInOnPath.replace('be', ''));
+                    homeInOnPath = '.beDecorated.' + lc(homeInOnPath.replace('be', ''));
                     homeInOnResolvedEventName = 'be-decorated.' + firstTokenCamel + '.resolved';
                 }
             }
@@ -111,7 +111,7 @@ export class BeSharing extends EventTarget {
         if (homeInOnPath !== undefined) {
             const { homeInOn } = await import('trans-render/lib/homeInOn.js');
             const { homeInOnResolvedEventName } = canonicalConfig;
-            host = await homeInOn(observingRealm, homeInOnPath, homeInOnResolvedEventName);
+            host = await homeInOn(observingRef, homeInOnPath, homeInOnResolvedEventName);
         }
         if (!host._isPropagating) {
             const { doBeHavings } = await import('trans-render/lib/doBeHavings.js');
