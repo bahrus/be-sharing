@@ -23,9 +23,36 @@ The following example demonstrates use of Hemingway Notation as much as possible
                 }
             }
         }
-        Set observing realm to parent. //this is the default.
-        Set home in on path to be scoped:scope.  //not set by default.  //Special intervention for properties that start with be[space].
-        Set sharing realm to parent. //this is the default.
+        Set observing realm to parent. //This is the default.
+        Set home in on path to be scoped:scope.  //Not set by default.  //Special intervention for properties that start with be[space].
+        Set sharing realm to parent. //This is the default.
+        Share count to button element as text content.
+        Share prop with \and \and \to in name to span element.
+    '>
+    </script>
+</div>
+```
+
+```html
+<div be-scoped='{
+    "count": 30,
+    "status": "Logged in",
+    "propWithAndAndToInName": "hello"
+}'>
+    <button></button>
+    <div class=inner></div>
+    <span></span>
+    <script be-sharing='
+        {        
+            "shareExpressions":{
+                "shareCountAndStatusTo":  {
+                    "innerC": ["", "status", " (", "count", " times)"]
+                }
+            }
+        }
+        Observe parent realm. //This is the default.
+        Observe be scoped:scope of said realm. //Not set by default.  //Special intervention for properties that start with be[space].
+        Set sharing realm to parent. //This is the default.
         Share count to button element as text content.
         Share prop with \and \and \to in name to span element.
     '>
