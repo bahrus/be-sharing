@@ -12,6 +12,7 @@
   "dependencies": {
     "be-decorated": "0.0.230",
     "be-exportable": "0.0.64",
+    "be-propagating": "0.0.1",
     "be-hive": "0.0.82",
     "trans-render": "0.0.667"
   },

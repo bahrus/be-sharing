@@ -77,7 +77,65 @@ export class BeSharing extends EventTarget {
             canonicalConfig
         };
     }
+    #sharingRealmRef;
+    #observingRef;
     async onCanonical(pp, mold) {
+        const { canonicalConfig, self } = pp;
+        const { sharingRealm, observingRealm, homeInOnPath, share } = canonicalConfig;
+        if (share === undefined || share.length === 0)
+            return mold;
+        let sharingRef;
+        if (this.#sharingRealmRef !== undefined) {
+            sharingRef = this.#sharingRealmRef.deref();
+        }
+        if (sharingRef === undefined) {
+            const { findRealm } = await import('trans-render/lib/findRealm.js');
+            sharingRef = await findRealm(self, sharingRealm);
+            this.#sharingRealmRef = new WeakRef(sharingRef);
+        }
+        let observingRef;
+        if (observingRealm === sharingRealm) {
+            observingRef = sharingRef;
+        }
+        else {
+            if (this.#observingRef !== undefined) {
+                observingRef = this.#observingRef.deref();
+            }
+            if (observingRef === undefined) {
+                const { findRealm } = await import('trans-render/lib/findRealm.js');
+                observingRef = await findRealm(self, observingRealm);
+                this.#observingRef = new WeakRef(observingRef);
+            }
+        }
+        let host = observingRef;
+        if (homeInOnPath !== undefined) {
+            const { homeInOn } = await import('trans-render/lib/homeInOn.js');
+            const { homeInOnResolvedEventName } = canonicalConfig;
+            host = await homeInOn(observingRealm, homeInOnPath, homeInOnResolvedEventName);
+        }
+        if (!host._isPropagating) {
+            const { doBeHavings } = await import('trans-render/lib/doBeHavings.js');
+            import('be-propagating/be-propagating.js');
+            await doBeHavings(host, [{
+                    be: 'propagating',
+                    waitForResolved: true,
+                }]);
+        }
+        const { DTR } = await import('trans-render/lib/DTR.js');
+        for (const shareInstance of share) {
+            const { transform, props } = shareInstance;
+            const ctx = {
+                host,
+                match: transform,
+            };
+            const dtr = new DTR(ctx);
+            await dtr.transform(sharingRef);
+            for (const prop of props) {
+                host.addEventListener(prop, e => {
+                    dtr.transform(sharingRef);
+                });
+            }
+        }
         return mold;
     }
 }

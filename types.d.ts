@@ -1,5 +1,5 @@
 import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
-import {camelQry, Scope, Matches} from 'trans-render/lib/types';
+import {camelQry, Scope, Matches, Transformer} from 'trans-render/lib/types';
 
 export interface EndUserProps {
     camelConfig?: CamelConfig;
@@ -29,7 +29,8 @@ export type ShareStatement =
 export type DynamicShareKey = `share${propName}To`
 export interface ShareTransform {
     props: string[],
-    transform: Matches
+    transform: Matches,
+    transformer?: Transformer,
 }
 export interface CamelConfig {
     Set?: SetStatement[],

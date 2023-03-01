@@ -1,6 +1,6 @@
 import {define, BeDecoratedProps} from 'be-decorated/DE.js';
 import {register} from "be-hive/register.js";
-import { Matches } from 'trans-render/lib/types';
+import { Matches, RenderContext } from 'trans-render/lib/types';
 import {Actions, PP, Proxy, PPP, CanonicalConfig, DynamicShareKey} from './types';
 
 export class BeSharing extends EventTarget implements Actions{
@@ -85,7 +85,63 @@ export class BeSharing extends EventTarget implements Actions{
         } as PPP;
     }
 
+    #sharingRealmRef: WeakRef<DocumentFragment> | undefined;
+    #observingRef: WeakRef<DocumentFragment> | undefined;
     async onCanonical(pp: PP, mold: Partial<PP>): Promise<PPP> {
+        const {canonicalConfig, self} = pp;
+        const {sharingRealm, observingRealm, homeInOnPath, share} = canonicalConfig!;
+        if(share === undefined || share.length === 0) return mold;
+        let sharingRef: DocumentFragment | undefined;
+        if(this.#sharingRealmRef !== undefined){
+            sharingRef = this.#sharingRealmRef.deref();
+        }
+        if(sharingRef === undefined){
+            const {findRealm} = await import('trans-render/lib/findRealm.js');
+            sharingRef = await findRealm(self, sharingRealm) as DocumentFragment;
+            this.#sharingRealmRef = new WeakRef(sharingRef);
+        }
+        let observingRef: DocumentFragment | undefined;
+        if(observingRealm === sharingRealm){
+            observingRef = sharingRef;
+        }else{
+            if(this.#observingRef !== undefined){
+                observingRef = this.#observingRef.deref();
+            }
+            if(observingRef === undefined){
+                const {findRealm} = await import('trans-render/lib/findRealm.js');
+                observingRef = await findRealm(self, observingRealm) as DocumentFragment;
+                this.#observingRef = new WeakRef(observingRef);
+            }
+        }
+        let host = observingRef;
+        if(homeInOnPath !== undefined){
+            const {homeInOn} = await import('trans-render/lib/homeInOn.js');
+            const {homeInOnResolvedEventName} = canonicalConfig!;
+            host = await homeInOn(observingRealm as any as Element, homeInOnPath, homeInOnResolvedEventName);
+        }
+        if(!(<any>host)._isPropagating){
+            const {doBeHavings} = await import('trans-render/lib/doBeHavings.js');
+            import('be-propagating/be-propagating.js');
+            await doBeHavings(host as any as Element, [{
+                be: 'propagating',
+                waitForResolved: true,
+            }]);
+        }
+        const {DTR} = await import('trans-render/lib/DTR.js');
+        for(const shareInstance of share){
+            const {transform, props} = shareInstance;
+            const ctx: RenderContext = {
+                host,
+                match: transform,
+            };
+            const dtr = new DTR(ctx);
+            await dtr.transform(sharingRef);
+            for(const prop of props){
+                host.addEventListener(prop, e=> {
+                    dtr.transform(sharingRef!);
+                });
+            }
+        }
         return mold;
     }
 }
