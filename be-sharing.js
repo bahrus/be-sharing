@@ -3,11 +3,11 @@ import { register } from "be-hive/register.js";
 export class BeSharing extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
-        const { Set } = camelConfig;
-        if (Set !== undefined) {
-            const { parseSet } = await import('be-decorated/cpu.js');
-            parseSet(Set, camelConfig);
-        }
+        // const {Set} = camelConfig!;
+        // if(Set !== undefined){
+        //     const {parseSet} = await import('be-decorated/cpu.js');
+        //     parseSet(Set, camelConfig);
+        // }
         let { homeInOnPath, observingRealm, sharingRealm } = camelConfig;
         observingRealm = observingRealm || 'parent';
         sharingRealm = sharingRealm || observingRealm;
@@ -156,6 +156,9 @@ define({
             virtualProps: ['camelConfig', 'canonicalConfig'],
             primaryProp: 'camelConfig',
             parseAndCamelize: true,
+            camelizeOptions: {
+                doSets: true
+            },
             primaryPropReq: true,
         },
         actions: {
