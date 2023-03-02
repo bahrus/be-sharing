@@ -23,7 +23,7 @@ The following example demonstrates use of Hemingway Notation as much as possible
                 }
             }
         }
-        Set observing realm to parent. //This is the default.
+        Observe parent. //This is the default.
         Set home in on path to be scoped:scope.  //Not set by default.  //Special intervention for properties that start with be[space].
         Set sharing realm to parent. //This is the default.
         Share count to button element as text content.
@@ -33,32 +33,6 @@ The following example demonstrates use of Hemingway Notation as much as possible
 </div>
 ```
 
-```html
-<div be-scoped='{
-    "count": 30,
-    "status": "Logged in",
-    "propWithAndAndToInName": "hello"
-}'>
-    <button></button>
-    <div class=inner></div>
-    <span></span>
-    <script be-sharing='
-        {        
-            "shareExpressions":{
-                "shareCountAndStatusTo":  {
-                    "innerC": ["", "status", " (", "count", " times)"]
-                }
-            }
-        }
-        Observe parent instance. //This is the default.
-        Observe be scoped:scope of said instance. //Not set by default.  //Special intervention for properties that start with be[space].
-        Set sharing realm to parent. //This is the default.
-        Share count to button element as text content.
-        Share prop with \and \and \to in name to span element.
-    '>
-    </script>
-</div>
-```
 
 ## JavaScriptObjectNotation
 
@@ -71,8 +45,8 @@ The following example demonstrates use of Hemingway Notation as much as possible
     <div class=inner></div>
     <span></span>
     <script be-sharing='{
-        "observeInstance": "parent",
-        "observeInstanceDetail": "beDecorated.beScoped.scope",
+        "observe": "parent",
+        "homeInOnPath": "beDecorated.beScoped.scope",
         "sharingRealm": "parent",
         "shareExpressions":{
             "shareCountAndStatusTo":  {
