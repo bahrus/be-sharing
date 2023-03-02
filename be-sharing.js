@@ -3,11 +3,6 @@ import { register } from "be-hive/register.js";
 export class BeSharing extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
-        // const {Set} = camelConfig!;
-        // if(Set !== undefined){
-        //     const {parseSet} = await import('be-decorated/cpu.js');
-        //     parseSet(Set, camelConfig);
-        // }
         let { homeInOnPath, observingRealm, sharingRealm } = camelConfig;
         observingRealm = observingRealm || 'parent';
         sharingRealm = sharingRealm || observingRealm;

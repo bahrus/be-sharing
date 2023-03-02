@@ -6,11 +6,7 @@ import {Actions, PP, Proxy, PPP, CanonicalConfig, DynamicShareKey} from './types
 export class BeSharing extends EventTarget implements Actions{
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
-        // const {Set} = camelConfig!;
-        // if(Set !== undefined){
-        //     const {parseSet} = await import('be-decorated/cpu.js');
-        //     parseSet(Set, camelConfig);
-        // }
+
 
 
         let {homeInOnPath, observingRealm, sharingRealm} = camelConfig!;
