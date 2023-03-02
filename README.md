@@ -71,8 +71,8 @@ The following example demonstrates use of Hemingway Notation as much as possible
     <div class=inner></div>
     <span></span>
     <script be-sharing='{
-        "observingRealm": "parent",
-        "homeInOnPath": "beDecorated.beScoped.scope",
+        "observeInstance": "parent",
+        "observeInstanceDetail": "beDecorated.beScoped.scope",
         "sharingRealm": "parent",
         "shareExpressions":{
             "shareCountAndStatusTo":  {
