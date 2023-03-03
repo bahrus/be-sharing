@@ -6,12 +6,12 @@ import {Actions, PP, Proxy, PPP, CanonicalConfig, DynamicShareKey, CamelConfig} 
 export class BeSharing extends EventTarget implements Actions{
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
-        let {homeInOnPath, observe, sharingRealm} = camelConfig!;
+        let {scrutinize, observe, sharingRealm} = camelConfig!;
         observe =  observe || 'parent';
         sharingRealm = sharingRealm || observe;
         let homeInOnResolvedEventName: string | undefined = undefined;
-        if(homeInOnPath !== undefined){
-            const split = homeInOnPath.split('.');
+        if(scrutinize !== undefined){
+            const split = scrutinize.split('.');
             if(split.length > 1){
                 const {camelToLisp} = await import('trans-render/lib/camelToLisp.js');
                 //const camelSplit = [camelToLisp(split[0]), camelToLisp(split[1])]; // split.map(s => camelToLisp(s));
@@ -19,14 +19,14 @@ export class BeSharing extends EventTarget implements Actions{
                 if(firstTokenCamel.startsWith('be-')){
                     firstTokenCamel = firstTokenCamel.replace('be-', '');
                     const {lc} = await import('be-decorated/cpu.js');
-                    homeInOnPath = '.beDecorated.' + lc(homeInOnPath.replace('be', ''));
+                    scrutinize = '.beDecorated.' + lc(scrutinize.replace('be', ''));
                     homeInOnResolvedEventName = 'be-decorated.' + firstTokenCamel + '.resolved';
                 }
                 
             }
         }
         const canonicalConfig: CanonicalConfig = {
-            homeInOnPath,
+            scrutinize,
             homeInOnResolvedEventName,
             observe,
             sharingRealm,
@@ -82,7 +82,7 @@ export class BeSharing extends EventTarget implements Actions{
     #observingRef: WeakRef<DocumentFragment> | undefined;
     async onCanonical(pp: PP, mold: Partial<PP>): Promise<PPP> {
         const {canonicalConfig, self} = pp;
-        const {sharingRealm, observe, homeInOnPath, share} = canonicalConfig!;
+        const {sharingRealm, observe, scrutinize, share} = canonicalConfig!;
         if(share === undefined || share.length === 0) return mold;
         let sharingRef: DocumentFragment | undefined;
         if(this.#sharingRealmRef !== undefined){
@@ -107,10 +107,10 @@ export class BeSharing extends EventTarget implements Actions{
             }
         }
         let host = observingRef;
-        if(homeInOnPath !== undefined){
+        if(scrutinize !== undefined){
             const {homeInOn} = await import('trans-render/lib/homeInOn.js');
             const {homeInOnResolvedEventName} = canonicalConfig!;
-            host = await homeInOn(observingRef as any as Element, homeInOnPath, homeInOnResolvedEventName);
+            host = await homeInOn(observingRef as any as Element, scrutinize, homeInOnResolvedEventName);
         }
         if(!(<any>host)._isPropagating){
             const {doBeHavings} = await import('trans-render/lib/doBeHavings.js');
@@ -178,7 +178,7 @@ define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
             parseAndCamelize: true,
             camelizeOptions: {
                 doSets: true,
-                simpleSets: ['Observe']
+                simpleSets: ['Observe', 'Scrutinize']
             },
             primaryPropReq: true,
         },

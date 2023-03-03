@@ -3,12 +3,12 @@ import { register } from "be-hive/register.js";
 export class BeSharing extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
-        let { homeInOnPath, observe, sharingRealm } = camelConfig;
+        let { scrutinize, observe, sharingRealm } = camelConfig;
         observe = observe || 'parent';
         sharingRealm = sharingRealm || observe;
         let homeInOnResolvedEventName = undefined;
-        if (homeInOnPath !== undefined) {
-            const split = homeInOnPath.split('.');
+        if (scrutinize !== undefined) {
+            const split = scrutinize.split('.');
             if (split.length > 1) {
                 const { camelToLisp } = await import('trans-render/lib/camelToLisp.js');
                 //const camelSplit = [camelToLisp(split[0]), camelToLisp(split[1])]; // split.map(s => camelToLisp(s));
@@ -16,13 +16,13 @@ export class BeSharing extends EventTarget {
                 if (firstTokenCamel.startsWith('be-')) {
                     firstTokenCamel = firstTokenCamel.replace('be-', '');
                     const { lc } = await import('be-decorated/cpu.js');
-                    homeInOnPath = '.beDecorated.' + lc(homeInOnPath.replace('be', ''));
+                    scrutinize = '.beDecorated.' + lc(scrutinize.replace('be', ''));
                     homeInOnResolvedEventName = 'be-decorated.' + firstTokenCamel + '.resolved';
                 }
             }
         }
         const canonicalConfig = {
-            homeInOnPath,
+            scrutinize,
             homeInOnResolvedEventName,
             observe,
             sharingRealm,
@@ -76,7 +76,7 @@ export class BeSharing extends EventTarget {
     #observingRef;
     async onCanonical(pp, mold) {
         const { canonicalConfig, self } = pp;
-        const { sharingRealm, observe, homeInOnPath, share } = canonicalConfig;
+        const { sharingRealm, observe, scrutinize, share } = canonicalConfig;
         if (share === undefined || share.length === 0)
             return mold;
         let sharingRef;
@@ -103,10 +103,10 @@ export class BeSharing extends EventTarget {
             }
         }
         let host = observingRef;
-        if (homeInOnPath !== undefined) {
+        if (scrutinize !== undefined) {
             const { homeInOn } = await import('trans-render/lib/homeInOn.js');
             const { homeInOnResolvedEventName } = canonicalConfig;
-            host = await homeInOn(observingRef, homeInOnPath, homeInOnResolvedEventName);
+            host = await homeInOn(observingRef, scrutinize, homeInOnResolvedEventName);
         }
         if (!host._isPropagating) {
             const { doBeHavings } = await import('trans-render/lib/doBeHavings.js');
@@ -153,7 +153,7 @@ define({
             parseAndCamelize: true,
             camelizeOptions: {
                 doSets: true,
-                simpleSets: ['Observe']
+                simpleSets: ['Observe', 'Scrutinize']
             },
             primaryPropReq: true,
         },

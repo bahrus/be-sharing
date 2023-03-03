@@ -37,9 +37,10 @@ export interface CamelConfig {
     Share?: ShareStatement[],
     share?: ShareTransform | ShareTransform[],
     Observe?: [Scope],
+    Scrutinize?: [string],
     observe?: Scope,
-    //observingRealm?: Scope,
-    homeInOnPath?: string,
+    //homeInOnPath?: string,
+    scrutinize?: string,
     sharingRealm?: Scope,
     shareExpressions?: {
         [key: DynamicShareKey]: Matches,
@@ -47,9 +48,9 @@ export interface CamelConfig {
 }
 
 export interface CanonicalConfig{
-    //observingRealm: Scope,
     observe: Scope,
-    homeInOnPath?: string,
+    //homeInOnPath?: string,
+    scrutinize?: string,
     homeInOnResolvedEventName?: string,
     sharingRealm: Scope,
     share: ShareTransform[],
