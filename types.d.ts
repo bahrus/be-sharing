@@ -36,7 +36,9 @@ export interface CamelConfig {
     Set?: SetStatement[],
     Share?: ShareStatement[],
     share?: ShareTransform | ShareTransform[],
-    observingRealm?: Scope,
+    Observe?: [Scope],
+    observe?: Scope,
+    //observingRealm?: Scope,
     homeInOnPath?: string,
     sharingRealm?: Scope,
     shareExpressions?: {
@@ -45,7 +47,8 @@ export interface CamelConfig {
 }
 
 export interface CanonicalConfig{
-    observingRealm: Scope,
+    //observingRealm: Scope,
+    observe: Scope,
     homeInOnPath?: string,
     homeInOnResolvedEventName?: string,
     sharingRealm: Scope,

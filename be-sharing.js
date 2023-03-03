@@ -3,9 +3,9 @@ import { register } from "be-hive/register.js";
 export class BeSharing extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
-        let { homeInOnPath, observingRealm, sharingRealm } = camelConfig;
-        observingRealm = observingRealm || 'parent';
-        sharingRealm = sharingRealm || observingRealm;
+        let { homeInOnPath, observe, sharingRealm } = camelConfig;
+        observe = observe || 'parent';
+        sharingRealm = sharingRealm || observe;
         let homeInOnResolvedEventName = undefined;
         if (homeInOnPath !== undefined) {
             const split = homeInOnPath.split('.');
@@ -24,7 +24,7 @@ export class BeSharing extends EventTarget {
         const canonicalConfig = {
             homeInOnPath,
             homeInOnResolvedEventName,
-            observingRealm,
+            observe,
             sharingRealm,
             share: []
         };
@@ -76,7 +76,7 @@ export class BeSharing extends EventTarget {
     #observingRef;
     async onCanonical(pp, mold) {
         const { canonicalConfig, self } = pp;
-        const { sharingRealm, observingRealm, homeInOnPath, share } = canonicalConfig;
+        const { sharingRealm, observe, homeInOnPath, share } = canonicalConfig;
         if (share === undefined || share.length === 0)
             return mold;
         let sharingRef;
@@ -89,7 +89,7 @@ export class BeSharing extends EventTarget {
             this.#sharingRealmRef = new WeakRef(sharingRef);
         }
         let observingRef;
-        if (observingRealm === sharingRealm) {
+        if (observe === sharingRealm) {
             observingRef = sharingRef;
         }
         else {
@@ -98,7 +98,7 @@ export class BeSharing extends EventTarget {
             }
             if (observingRef === undefined) {
                 const { findRealm } = await import('trans-render/lib/findRealm.js');
-                observingRef = await findRealm(self, observingRealm);
+                observingRef = await findRealm(self, observe);
                 this.#observingRef = new WeakRef(observingRef);
             }
         }
@@ -152,7 +152,8 @@ define({
             primaryProp: 'camelConfig',
             parseAndCamelize: true,
             camelizeOptions: {
-                doSets: true
+                doSets: true,
+                simpleSets: ['Observe']
             },
             primaryPropReq: true,
         },

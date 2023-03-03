@@ -1,17 +1,14 @@
 import {define, BeDecoratedProps} from 'be-decorated/DE.js';
 import {register} from "be-hive/register.js";
 import { Matches, RenderContext } from 'trans-render/lib/types';
-import {Actions, PP, Proxy, PPP, CanonicalConfig, DynamicShareKey} from './types';
+import {Actions, PP, Proxy, PPP, CanonicalConfig, DynamicShareKey, CamelConfig} from './types';
 
 export class BeSharing extends EventTarget implements Actions{
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
-
-
-
-        let {homeInOnPath, observingRealm, sharingRealm} = camelConfig!;
-        observingRealm =  observingRealm || 'parent';
-        sharingRealm = sharingRealm || observingRealm;
+        let {homeInOnPath, observe, sharingRealm} = camelConfig!;
+        observe =  observe || 'parent';
+        sharingRealm = sharingRealm || observe;
         let homeInOnResolvedEventName: string | undefined = undefined;
         if(homeInOnPath !== undefined){
             const split = homeInOnPath.split('.');
@@ -31,7 +28,7 @@ export class BeSharing extends EventTarget implements Actions{
         const canonicalConfig: CanonicalConfig = {
             homeInOnPath,
             homeInOnResolvedEventName,
-            observingRealm,
+            observe,
             sharingRealm,
             share: []
         };
@@ -85,7 +82,7 @@ export class BeSharing extends EventTarget implements Actions{
     #observingRef: WeakRef<DocumentFragment> | undefined;
     async onCanonical(pp: PP, mold: Partial<PP>): Promise<PPP> {
         const {canonicalConfig, self} = pp;
-        const {sharingRealm, observingRealm, homeInOnPath, share} = canonicalConfig!;
+        const {sharingRealm, observe, homeInOnPath, share} = canonicalConfig!;
         if(share === undefined || share.length === 0) return mold;
         let sharingRef: DocumentFragment | undefined;
         if(this.#sharingRealmRef !== undefined){
@@ -97,7 +94,7 @@ export class BeSharing extends EventTarget implements Actions{
             this.#sharingRealmRef = new WeakRef(sharingRef);
         }
         let observingRef: DocumentFragment | undefined;
-        if(observingRealm === sharingRealm){
+        if(observe === sharingRealm){
             observingRef = sharingRef;
         }else{
             if(this.#observingRef !== undefined){
@@ -105,7 +102,7 @@ export class BeSharing extends EventTarget implements Actions{
             }
             if(observingRef === undefined){
                 const {findRealm} = await import('trans-render/lib/findRealm.js');
-                observingRef = await findRealm(self, observingRealm) as DocumentFragment;
+                observingRef = await findRealm(self, observe) as DocumentFragment;
                 this.#observingRef = new WeakRef(observingRef);
             }
         }
@@ -169,7 +166,7 @@ const tagName = 'be-sharing';
 const ifWantsToBe = 'sharing';
 const upgrade = 'script';
 
-define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
+define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
     config: {
         tagName,
         propDefaults: {
@@ -180,7 +177,8 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
             primaryProp: 'camelConfig',
             parseAndCamelize: true,
             camelizeOptions: {
-                doSets: true
+                doSets: true,
+                simpleSets: ['Observe']
             },
             primaryPropReq: true,
         },
