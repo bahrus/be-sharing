@@ -11,19 +11,6 @@ export class BeSharing extends EventTarget implements Actions{
         sharingRealm = sharingRealm || observe;
         let homeInOnResolvedEventName: string | undefined = undefined;
         if(scrutinize !== undefined){
-            // const split = scrutinize.split('.');
-            // if(split.length > 1){
-            //     const {camelToLisp} = await import('trans-render/lib/camelToLisp.js');
-            //     //const camelSplit = [camelToLisp(split[0]), camelToLisp(split[1])]; // split.map(s => camelToLisp(s));
-            //     let firstTokenCamel = camelToLisp(split[0]);
-            //     if(firstTokenCamel.startsWith('be-')){
-            //         firstTokenCamel = firstTokenCamel.replace('be-', '');
-            //         const {lc} = await import('be-decorated/cpu.js');
-            //         scrutinize = '.beDecorated.' + lc(scrutinize.replace('be', ''));
-            //         homeInOnResolvedEventName = 'be-decorated.' + firstTokenCamel + '.resolved';
-            //     }
-                
-            // }
             const {beSplit} = await import('be-decorated/cpu.js');
             const split = await beSplit(scrutinize);
             if(split !== undefined){
