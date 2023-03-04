@@ -18,8 +18,8 @@ export type sharingRealm = string;
 export type propName = string;
 
 export type SetStatement = 
-    |   `ObservingRealmTo${observingRealm}` 
-    |   `HomeInOnPathTo${homeInOnPath}`
+    //|   `ObservingRealmTo${observingRealm}` 
+    //|   `HomeInOnPathTo${homeInOnPath}`
     |   `SharingRealmTo${sharingRealm}`;
 
 export type ShareStatement = 
@@ -39,7 +39,6 @@ export interface CamelConfig {
     Observe?: [Scope],
     Scrutinize?: [string],
     observe?: Scope,
-    //homeInOnPath?: string,
     scrutinize?: string,
     sharingRealm?: Scope,
     shareExpressions?: {

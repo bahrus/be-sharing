@@ -24,7 +24,7 @@ The following example demonstrates use of Hemingway Notation as much as possible
             }
         }
         Observe parent. //This is the default.
-        Scrutinize beScoped:scope.  //Not set by default.  //Special intervention for properties that start with be[space].
+        Scrutinize beScoped:scope.  //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
         Set sharing realm to parent. //This is the default.
         Share count to button element as text content.
         Share prop with \and \and \to in name to span element.
