@@ -15,22 +15,22 @@ The following example demonstrates use of Hemingway Notation as much as possible
     <button></button>
     <div class=inner></div>
     <span></span>
-    <script be-sharing='
-        {        
-            "shareExpressions":{
-                "shareCountAndStatusTo":  {
-                    "innerC": ["", "status", " (", "count", " times)"]
-                }
+</div>
+<script be-sharing='
+    {        
+        "shareExpressions":{
+            "shareCountAndStatusTo":  {
+                "innerC": ["", "status", " (", "count", " times)"]
             }
         }
-        Observe parent. //This is the default.
-        Scrutinize beScoped:scope.  //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
-        Set sharing realm to parent. //This is the default.
-        Share count to button element as text content.
-        Share prop with \and \and \to in name to span element.
-    '>
-    </script>
-</div>
+    }
+    Observe previous element sibling. //This is the default.
+    Scrutinize beScoped:scope.  //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
+    Set sharing realm to previous element sibling. //This is the default.
+    Share count to button element as text content.
+    Share prop with \and \and \to in name to span element.
+'>
+</script>
 ```
 
 
@@ -44,24 +44,24 @@ The following example demonstrates use of Hemingway Notation as much as possible
     <button></button>
     <div class=inner></div>
     <span></span>
-    <script be-sharing='{
-        "observe": "parent",
-        "homeInOnPath": "beDecorated.beScoped.scope",
-        "sharingRealm": "parent",
-        "shareExpressions":{
-            "shareCountAndStatusTo":  {
-                "innerC": ["", "status", " (", "count", " times)"]
-            }
-        },
-        "Share": ["countToButtonEAsTextContent"],
-        "share": [{
-            "props": ["propWithAndAndToInName"],
-            "transform": {
-                "span": "propWithAndAndToInName"
-            }
-        }]
-    }'>
-    </script>
 </div>
+<script be-sharing='{
+    "observe": "previousElementSibling",
+    "homeInOnPath": "beDecorated.beScoped.scope",
+    "sharingRealm": "parent",
+    "shareExpressions":{
+        "shareCountAndStatusTo":  {
+            "innerC": ["", "status", " (", "count", " times)"]
+        }
+    },
+    "Share": ["countToButtonEAsTextContent"],
+    "share": [{
+        "props": ["propWithAndAndToInName"],
+        "transform": {
+            "span": "propWithAndAndToInName"
+        }
+    }]
+}'>
+</script>
 ```
 

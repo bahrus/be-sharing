@@ -7,7 +7,7 @@ export class BeSharing extends EventTarget implements Actions{
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
         let {scrutinize, observe, sharingRealm} = camelConfig!;
-        observe =  observe || 'parent';
+        observe =  observe || 'previousElementSibling';
         sharingRealm = sharingRealm || observe;
         let homeInOnResolvedEventName: string | undefined = undefined;
         if(scrutinize !== undefined){
@@ -157,7 +157,7 @@ const reSrcPropToCamelQryAsDomProp = /^(?<srcProp>[\w\\]+)(?<!\\)To(?<camelQry>\
 
 const tagName = 'be-sharing';
 const ifWantsToBe = 'sharing';
-const upgrade = 'script';
+const upgrade = 'script,template';
 
 define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
     config: {
@@ -165,7 +165,7 @@ define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
         propDefaults: {
             upgrade,
             ifWantsToBe,
-            forceVisible: [upgrade],
+            forceVisible: ['script', 'template'],
             virtualProps: ['camelConfig', 'canonicalConfig'],
             primaryProp: 'camelConfig',
             parseAndCamelize: true,

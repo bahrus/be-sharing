@@ -5,7 +5,7 @@ export interface EndUserProps {
     camelConfig?: CamelConfig;
 }
 
-export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLScriptElement>{
+export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLScriptElement | HTMLTemplateElement>{
     canonicalConfig?: CanonicalConfig;
 }
 
@@ -55,7 +55,7 @@ export interface CanonicalConfig{
     share: ShareTransform[],
 }
 
-export type Proxy = HTMLScriptElement & VirtualProps;
+export type Proxy = (HTMLScriptElement | HTMLTemplateElement) & VirtualProps;
 
 export interface PP extends VirtualProps{
     proxy: Proxy
