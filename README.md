@@ -53,20 +53,9 @@ If the server can be trained to generate the initial view, including setting pro
     <span>hello</span>
 </div>
 <script be-sharing='
-    {   
-        "declare": {
-            "innerClass": {
-                ".inner": ["", "status", " (", "count", " times)"]
-            }
-        }     
-    }
-    Observe previous element sibling. //This is the default.
-    Scrutinize beScoped:scope.  //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
-    Set sharing realm to previous element sibling. //This is the default.
+    ...
     Skip initial render. //"initial render" is commentary, and can be any verbiage that explains what skip is doing.
-    Share count to button element as text content.
-    Share prop with \and \and \to in name to span element.
-    Share count and status to inner class.
+    ...
 '>
 </script>
 ```
