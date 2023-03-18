@@ -23,7 +23,7 @@ export class BeSharing extends EventTarget {
             share: []
         };
         const { share } = canonicalConfig;
-        const { Share, shareExpressions, declare } = camelConfig;
+        const { Share, /*shareExpressions,*/ declare } = camelConfig;
         if (Share !== undefined) {
             const { tryParse } = await import('be-decorated/cpu.js');
             for (const key of Share) {
@@ -52,18 +52,18 @@ export class BeSharing extends EventTarget {
                 }
             }
         }
-        if (shareExpressions !== undefined) {
-            const { tryParse } = await import('be-decorated/cpu.js');
-            for (const key in shareExpressions) {
-                const sp = tryParse(key, reSrcPropsTo);
-                if (sp !== null) {
-                    share.push({
-                        props: await this.#splitAnd(sp.srcProps),
-                        transform: shareExpressions[key]
-                    });
-                }
-            }
-        }
+        // if(shareExpressions !== undefined){
+        //     const {tryParse} = await import('be-decorated/cpu.js');
+        //     for(const key in shareExpressions){
+        //         const sp = tryParse(key, reSrcPropsTo) as SrcProps;
+        //         if(sp !== null){
+        //             share.push({
+        //                 props: await this.#splitAnd(sp.srcProps),
+        //                 transform: shareExpressions[key as DynamicShareKey] as any as Matches
+        //             })
+        //         }
+        //     }
+        // }
         return {
             canonicalConfig
         };

@@ -42,9 +42,9 @@ export interface CamelConfig {
     observe?: Scope,
     scrutinize?: string,
     sharingRealm?: Scope,
-    shareExpressions?: {
-        [key: DynamicShareKey]: Matches,
-    }
+    // shareExpressions?: {
+    //     [key: DynamicShareKey]: Matches,
+    // }
 }
 
 export interface CanonicalConfig{
