@@ -23,27 +23,30 @@ export class BeSharing extends EventTarget {
             share: []
         };
         const { share } = canonicalConfig;
-        const { Share, shareExpressions } = camelConfig;
+        const { Share, shareExpressions, declare } = camelConfig;
         if (Share !== undefined) {
             const { tryParse } = await import('be-decorated/cpu.js');
             for (const key of Share) {
-                const spcqdp = tryParse(key, reSrcPropToCamelQryAsDomProp);
+                const spcqdp = tryParse(key, reSrcPropToCamelQryAsDomProp, declare);
                 if (spcqdp != null) {
+                    const { srcProp } = spcqdp;
                     share.push({
-                        props: [spcqdp.srcProp],
+                        props: await this.#splitAnd(srcProp),
                         transform: {
-                            [spcqdp.camelQry]: { [spcqdp.domProp]: spcqdp.srcProp }
+                            [spcqdp.camelQry]: { [spcqdp.domProp]: srcProp }
                         },
                     });
                     continue;
                 }
-                const spcq = tryParse(key, reSrcPropToCamelQry);
+                const spcq = tryParse(key, reSrcPropToCamelQry, declare);
                 if (spcq !== null) {
+                    const { srcProp, camelQry } = spcq;
+                    const props = await this.#splitAnd(srcProp);
                     share.push({
-                        props: [spcq.srcProp],
-                        transform: {
-                            [spcq.camelQry]: spcq.srcProp
-                        }
+                        props,
+                        transform: typeof camelQry === 'string' ? {
+                            [spcq.camelQry]: props.length === 1 ? props[0] : props.map(prop => ['', prop]).flat(),
+                        } : camelQry
                     });
                     continue;
                 }
@@ -54,9 +57,8 @@ export class BeSharing extends EventTarget {
             for (const key in shareExpressions) {
                 const sp = tryParse(key, reSrcPropsTo);
                 if (sp !== null) {
-                    const { lc } = await import('be-decorated/cpu.js');
                     share.push({
-                        props: sp.srcProps.split(reAndSplit).map(s => lc(s)),
+                        props: await this.#splitAnd(sp.srcProps),
                         transform: shareExpressions[key]
                     });
                 }
@@ -65,6 +67,10 @@ export class BeSharing extends EventTarget {
         return {
             canonicalConfig
         };
+    }
+    async #splitAnd(s) {
+        const { lc, unescSplit } = await import('be-decorated/cpu.js');
+        return s.split(reAndSplit).map(s => lc(s)).map(s => unescSplit(s));
     }
     #sharingRealmRef;
     #observingRef;

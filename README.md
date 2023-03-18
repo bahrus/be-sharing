@@ -48,7 +48,7 @@ Alternative [TODO]:
 <script be-sharing='
     {   
         "declare": {
-            "sAndC": {
+            "innerClass": {
                 "innerC": ["", "status", " (", "count", " times)"]
             }
         }     
@@ -58,7 +58,7 @@ Alternative [TODO]:
     Set sharing realm to previous element sibling. //This is the default.
     Share count to button element as text content.
     Share prop with \and \and \to in name to span element.
-    Share count and status to s and c.
+    Share count and status to inner class.
 '>
 </script>
 ```

@@ -1,4 +1,4 @@
-import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
+import {BeDecoratedProps, MinimalProxy, Declarations} from 'be-decorated/types';
 import {camelQry, Scope, Matches, Transformer} from 'trans-render/lib/types';
 
 export interface EndUserProps {
@@ -35,6 +35,7 @@ export interface ShareTransform {
 export interface CamelConfig {
     Set?: SetStatement[],
     Share?: ShareStatement[],
+    declare: Declarations,
     share?: ShareTransform | ShareTransform[],
     Observe?: [Scope],
     Scrutinize?: [string],

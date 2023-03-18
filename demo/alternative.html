@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div be-scoped='{
+        "count": 30,
+        "status": "Logged in",
+        "propWithAndAndToInName": "hello"
+    }'>
+        <button></button>
+        <div class=inner></div>
+        <span></span>
+        <script be-sharing='
+            {        
+                "declare":{
+                    "innerClass":  {
+                        "innerC": ["", "status", " (", "count", " times)"]
+                    }
+                }
+            }
+            Observe parent. //This is the default.
+            Scrutinize beScoped:scope.  //Not set by default.  //Special intervention for properties that start with be[space].
+            Set sharing realm to parent. //This is the default.
+            Share count to button element as text content.
+            Share prop with \and \and \to in name to span element.
+            Share count and status to inner class.
+        '>
+        </script>
+        <script type=importmap>
+            {
+                "imports": {
+                    "be-decorated/": "../be-decorated/",
+                    "be-hive/": "../node_modules/be-hive/",
+                    "be-scoped/": "../node_modules/be-scoped/",
+                    "trans-render/": "../node_modules/trans-render/"
+                }
+            }
+        </script>
+        <script type=module>
+            import '../be-sharing.js';
+            import 'be-scoped/be-scoped.js';
+        </script>
+    </div>
+</body>
+</html>
