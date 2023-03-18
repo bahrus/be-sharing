@@ -49,7 +49,7 @@ Alternative [TODO]:
     {   
         "declare": {
             "innerClass": {
-                "innerC": ["", "status", " (", "count", " times)"]
+                ".inner": ["", "status", " (", "count", " times)"]
             }
         }     
     }
