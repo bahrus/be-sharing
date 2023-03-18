@@ -33,6 +33,36 @@ The following example demonstrates use of Hemingway Notation as much as possible
 </script>
 ```
 
+Alternative [TODO]:
+
+```html
+<div be-scoped='{
+    "count": 30,
+    "status": "Logged in",
+    "propWithAndAndToInName": "hello"
+}'>
+    <button></button>
+    <div class=inner></div>
+    <span></span>
+</div>
+<script be-sharing='
+    {   
+        "declare": {
+            "sAndC": {
+                "innerC": ["", "status", " (", "count", " times)"]
+            }
+        }     
+    }
+    Observe previous element sibling. //This is the default.
+    Scrutinize beScoped:scope.  //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
+    Set sharing realm to previous element sibling. //This is the default.
+    Share count to button element as text content.
+    Share prop with \and \and \to in name to span element.
+    Share count and status to s and c.
+'>
+</script>
+```
+
 
 ## JavaScriptObjectNotation
 
