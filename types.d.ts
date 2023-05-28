@@ -1,71 +1,27 @@
-import {BeDecoratedProps, MinimalProxy, Declarations} from 'be-decorated/types';
-import {camelQry, Scope, Matches, Transformer} from 'trans-render/lib/types';
+import { ActionOnEventConfigs } from "trans-render/froop/types";
+import {IBE, Declarations} from 'be-enhanced/types';
+import {SharingCamelConfig, CanonicalConfig} from '../be-linked/types';
 
-export interface EndUserProps {
-    camelConfig?: CamelConfig;
+export interface EndUserProps extends IBE {
+    camelConfig?: SharingCamelConfig | SharingCamelConfig[],
 }
 
-export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLScriptElement | HTMLTemplateElement>{
+export interface AllProps extends EndUserProps {
     canonicalConfig?: CanonicalConfig;
 }
 
-export type observingRealm = string;
 
-export type homeInOnPath = string;
 
-export type sharingRealm = string;
+export type AP = AllProps;
 
-export type propName = string;
+export type PAP = Partial<AP>;
 
-export type SetStatement = 
-    //|   `ObservingRealmTo${observingRealm}` 
-    //|   `HomeInOnPathTo${homeInOnPath}`
-    |   `SharingRealmTo${sharingRealm}`;
+export type ProPAP = Promise<PAP>;
 
-export type ShareStatement = 
-    | `${string}To${camelQry}As${string}`
-    | `${string}To${camelQry}`;
-
-export type DynamicShareKey = `share${propName}To`
-export interface ShareTransform {
-    props: string[],
-    transform: Matches,
-    transformer?: Transformer,
-}
-export interface CamelConfig {
-    Set?: SetStatement[],
-    Share?: ShareStatement[],
-    declare: Declarations,
-    share?: ShareTransform | ShareTransform[],
-    Observe?: [Scope],
-    Scrutinize?: [string],
-    observe?: Scope,
-    scrutinize?: string,
-    sharingRealm?: Scope,
-    // shareExpressions?: {
-    //     [key: DynamicShareKey]: Matches,
-    // }
-}
-
-export interface CanonicalConfig{
-    observe: Scope,
-    //homeInOnPath?: string,
-    scrutinize?: string,
-    homeInOnResolvedEventName?: string,
-    sharingRealm: Scope,
-    share: ShareTransform[],
-}
-
-export type Proxy = (HTMLScriptElement | HTMLTemplateElement) & VirtualProps;
-
-export interface PP extends VirtualProps{
-    proxy: Proxy
-}
-
-export type PPP = Partial<PP>;
+export type POA = [PAP | undefined, ActionOnEventConfigs<PAP, Actions>];
 
 export interface Actions{
-    camelToCanonical(pp: PP): Promise<PPP>;
-    onCanonical(pp: PP, mold: PPP): Promise<PPP>;
+    camelToCanonical(self: this): ProPAP;
+    onCanonical(self: this): ProPAP;
 }
 
