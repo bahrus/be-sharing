@@ -10,7 +10,7 @@
 		"strict": true,
 	},
 	"files":[
-		"be-sharing.ts"
+		"v2/be-sharing.ts"
 	],
 	"exclude":[
 		"node_modules"

@@ -7,31 +7,39 @@
     "custom-element",
     "custom-elements"
   ],
-  "description": "",
-  "main": "index.js",
+  "description": "Share values from (enhancements of) the adorned element to other neighboring DOM (custom) elements.",
+  "main": "be-sharing.js",
+  "module": "be-sharing.js",
+  "exports": {
+    ".": "./be-sharing.js"
+  },
+  "files": [
+    "*.js",
+    "types.d.ts"
+  ],
   "dependencies": {
-    "be-decorated": "0.0.235",
-    "be-exportable": "0.0.66",
-    "be-hive": "0.0.82",
-    "be-propagating": "0.0.3",
-    "trans-render": "0.0.670"
+    "be-enhanced": "0.0.21",
+    "be-exportable": "0.0.74",
+    "be-hive": "0.0.95",
+    "be-propagating": "0.0.10",
+    "trans-render": "0.0.681",
+    "xtal-element": "0.0.562"
   },
   "devDependencies": {
-    "be-scoped": "0.0.6",
+    "be-scoped": "0.0.10",
     "may-it-serve": "0.0.5",
-    "@skypack/package-check": "0.2.2",
-    "@playwright/test": "1.31.2"
+    "@playwright/test": "1.34.3"
   },
   "scripts": {
     "serve": "node node_modules/may-it-serve/serve.js",
-    "package-check": "package-check",
-    "test": "playwright test"
+    "test": "playwright test",
+    "safari": "npx playwright wk http://localhost:3030"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahrus/be-sharing.git"
   },
-  "author": "",
+  "author": "anderson.bruce.b@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bahrus/be-sharing/issues"
