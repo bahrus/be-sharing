@@ -21,7 +21,17 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
 </div>
 ```
 
+## Formatting (WIP)
 
+*be-sharing* provides out-of-the box formatting for the data and time elements.
+
+```html
+<data itemprop=count>
+```
+
+... sets the value attribute of the data element equal to the raw numeric value (num.toString()).  The text content is set to num.toLocaleDateString().
+
+It can take the lang attribute into account [ TODO], and uses a custom attribute
 
 So what be-sharing is doing can best be explained by words:
 
