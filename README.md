@@ -21,6 +21,8 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
 </div>
 ```
 
+[TODO] Document use of commas if there are multiple scope properties to share.
+
 ## Formatting
 
 *be-sharing* provides special out-of-the box, microdata-compatible formatting for the *data*, *time* and *output* elements.
@@ -43,7 +45,7 @@ However, that is only the default setting.  Behind the scenes, *be-sharing* is m
 
 What be-sharing (with statement "Share count from scope.") is doing can best be explained by words:
 
-1.  Find the nearest element ancestor with an itemscope attribute (starting from the adorned element).
+1.  ~~Find the nearest element ancestor with an itemscope attribute (starting from the adorned element).~~ Only do this if adorning the script element.
 2.  Observe the be-scoped object that adorns the element with the itemscope attribute.
 3.  When the count property of the be-scoped object changes, pass the value of count to all elements within the itemscope which has attribute itemprop = count.
 
@@ -52,7 +54,7 @@ So *be-sharing* is basically breathing life into the [microdata standard](https:
 
 The sentence structure contained inside the be-sharing attribute is adopting what we dub ["Hemingway Notation"](https://bookanalysis.com/ernest-hemingway/writing-style/).
 
-## Sharing values from a custom element [Untested]
+## Sharing values from a custom element [WIP]
 
 *be-sharing* can also work well together with custom elements that use standard property getters/setters:
 
@@ -60,7 +62,7 @@ Specify:
 
 ```html
 <my-custom-element-no-shadow itemscope be-sharing='
-    Share count from element props.
+    Share count from $0.
 '>
     <span itemprop="count"></span>
 </my-custom-element-no-shadow>
@@ -76,6 +78,21 @@ What this opens up is an interesting breed of custom elements:  Custom elements 
 
 Another scenario:  The custom element does have Shadow DOM, which the internal custom element takes care of binding to, but expects (or allows for) some interplay between some of the properties it supports and the light children, again leaving that up to the developer/consumer.  Essentially, the "encapsulation" model is softened somewhat to allow the light children to engage in the state of the custom element.
 
+## Acting on shared scope [TODO]
 
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30
+    }'
+    be-sharing='
+        Share count from scope.
+    '
+>
+    <span itemprop="count"></span>
+    <script be-sharing='
 
+    '>
+</div>
+```
 
