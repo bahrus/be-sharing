@@ -21,7 +21,22 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
 </div>
 ```
 
-[TODO] Document use of commas if there are multiple scope properties to share.
+If there are multiple scope properties to share, list them with the comma delimiter.  For example:
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello"
+    }'
+    be-sharing='
+        Share count, greeting from scope.
+    '
+>
+    <data itemprop="count"></data>
+    <span itemprop="greeting"></span>
+</div>
+```
 
 ## Formatting
 
@@ -91,8 +106,12 @@ Another scenario:  The custom element does have Shadow DOM, which the internal c
 >
     <span itemprop="count"></span>
     <script be-sharing='
-
+        Pipe count to do something.
     '>
+        export function doSomething({count, scope, scopedElement}){
+
+        }
+    <script>
 </div>
 ```
 
