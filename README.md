@@ -93,7 +93,7 @@ What this opens up is an interesting breed of custom elements:  Custom elements 
 
 Another scenario:  The custom element does have Shadow DOM, which the internal custom element takes care of binding to, but expects (or allows for) some interplay between some of the properties it supports and the light children, again leaving that up to the developer/consumer.  Essentially, the "encapsulation" model is softened somewhat to allow the light children to engage in the state of the custom element.
 
-## Acting on shared scope [TODO]
+## Acting on shared scope changes [TODO]
 
 ```html
 <div itemscope 
