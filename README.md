@@ -17,7 +17,7 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
         Share count from scope.
     '
 >
-    <span itemprop="count"></span>
+    <data itemprop="count"></data>
 </div>
 ```
 
