@@ -42,7 +42,26 @@ If there are multiple scope properties to share, list them with the comma delimi
 
 Example 2:  Share to properties of non-microdata supporting elements [TODO]
 
-Example 2a:  With inline binding
+Example 2a:  By name, id
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello"
+    }'
+    be-sharing='
+        Share count, greeting from scope by itemprop, name, id.
+    '
+>
+    <data itemprop="count"></data>
+    <span itemprop="greeting"></span>
+    <input name="count" type=number>
+    <div id=greeting></div>
+</div>
+```
+
+Example 2b:  With inline binding
 
 ```html
 <div itemscope 
@@ -61,7 +80,7 @@ Example 2a:  With inline binding
 </div>
 ```
 
-Example 2b:  Without inline binding
+Example 2c:  Without inline binding
 
 ```html
 <div itemscope 
@@ -135,8 +154,6 @@ Specify:
     <span itemprop=greeting></span>
 </my-custom-element-no-shadow>
 ```
-
-"to scope" is ignored and can be there for commentary purposes.
 
 This use of be-sharing only distributes property values to the **light children** of the custom element.  
 
