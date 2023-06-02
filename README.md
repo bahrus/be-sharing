@@ -55,7 +55,7 @@ Example 2a:  With inline binding
         Share is happy from scope.
     '
 >
-    <input -disabled=isHappy>
+    <input -is-happy=disabled>
 </div>
 ```
 
