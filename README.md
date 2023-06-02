@@ -2,7 +2,7 @@
 
 >**Note**: This enhancement works best with browsers that support the @scope css selector.
 
-Share values from (enhancements of) the adorned element to other neighboring DOM (custom) elements.
+Share values from (enhancements of) the adorned element to other neighboring DOM (custom) elements, specializing, but not limited to, microdata enhanced elements.
 
 be-sharing is one DOM custom enhancement among a triumvirate of enhancements that rollup to [be-hydrated](https://github.com/bahrus/be-hydrated).
 
@@ -61,22 +61,25 @@ Example 2a:  By name, id
 </div>
 ```
 
+
 Example 2b:  With inline binding
 
 ```html
 <div itemscope 
     be-scoped='{
         "count": 30,
-        "greeting": "hello",
+        "description": "Mr. Banks flying a kite with his kids.",
         "isHappy": true
     }'
     be-sharing='
         Share is happy, greeting from scope.
     '
 >
-    <link itemprop=isHappy -disabled>
-    <meta itemprop=greeting -value>
+    <link itemprop=isHappy part=disabled>
+    <meta itemprop=count part=maxLength>
     <input>
+    <meta itemprop=description part=alt>
+    <img>
 </div>
 ```
 
@@ -85,17 +88,18 @@ Example 2c:  Without inline binding
 ```html
 <div itemscope 
     be-scoped='{
-        "count": 30,
-        "greeting": "hello",
-        "isHappy": true
+        "description": "Mr. Banks flying a kite with his kids.",
+        "summary": "Mr. Banks with kids.",
     }'
     be-sharing='
-        Share is happy, greeting from scope to disabled, value properties of input element.
+        Share is happy, greeting from scope to disabled, value properties of img element.
     '
 >
-    <input>
+    <img>
 </div>
 ```
+
+>**Note:** Because the HTML may stream in slowly, we aren't guaranteed that *be-sharing* will be able to distribute everything on the first go.  To guarantee nothing is missed, add a *be-a-beacon* adorned element as the last child of the itemscope tag. (Hopefully the platform will resolve this issue soon.)  Alternative, adorn a script element at the bottom of the page, and put all the sharing statements there, as shown 
 
 ## Formatting
 
@@ -155,7 +159,7 @@ Specify:
 </my-custom-element-no-shadow>
 ```
 
-This use of be-sharing only distributes property values to the **light children** of the custom element.  
+This use of be-sharing only distributes property values to the **light children** of the custom element (outside any elements with itemscope attribute).  Using "donut" css selection via @scope when available.  
 
 ### Use Case 1:  Cerebral web components
 
