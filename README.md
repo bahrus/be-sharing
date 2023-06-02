@@ -52,10 +52,12 @@ Example 2a:  With inline binding
         "isHappy": true
     }'
     be-sharing='
-        Share is happy from scope.
+        Share is happy, greeting from scope.
     '
 >
-    <input -is-happy=disabled>
+    <link itemprop=isHappy to-disabled>
+    <meta itemprop=greeting to-value>
+    <input>
 </div>
 ```
 
@@ -69,7 +71,7 @@ Example 2b:  Without inline binding
         "isHappy": true
     }'
     be-sharing='
-        Share is happy from scope to disabled property of input element.
+        Share is happy, greeting from scope to disabled, value properties of input element.
     '
 >
     <input>
@@ -120,6 +122,21 @@ Specify:
     <span itemprop="count"></span>
 </my-custom-element-no-shadow>
 ```
+
+## Flattening/mapping properties from a custom element to scope [TODO]
+
+```html
+<my-custom-element-no-shadow itemscope be-sharing='
+    Echo $0:numberOfWidgets to scope:count.
+    Echo $0:greetingsAndSalutations:monday:morningMessage to scope:greeting.
+    Share count, greeting from scope.
+'>
+    <data itemprop=count></data>
+    <span itemprop=greeting></span>
+</my-custom-element-no-shadow>
+```
+
+"to scope" is ignored and can be there for commentary purposes.
 
 This use of be-sharing only distributes property values to the **light children** of the custom element.  
 
