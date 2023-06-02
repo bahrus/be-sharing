@@ -92,7 +92,7 @@ Example 2c:  Without inline binding
         "summary": "Mr. Banks with kids.",
     }'
     be-sharing='
-        Share is happy, greeting from scope to disabled, value properties of img element.
+        Share description, summary from scope to alt, title properties of img element.
     '
 >
     <img>
