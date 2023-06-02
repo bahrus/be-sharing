@@ -1,6 +1,6 @@
 # be-sharing [WIP]
 
->**Note**: This enhancement works best with browers that support the @scope css selector.
+>**Note**: This enhancement works best with browsers that support the @scope css selector.
 
 Share values from (enhancements of) the adorned element to other neighboring DOM (custom) elements.
 
@@ -37,6 +37,42 @@ If there are multiple scope properties to share, list them with the comma delimi
 >
     <data itemprop="count"></data>
     <span itemprop="greeting"></span>
+</div>
+```
+
+Example 2:  Share to properties of non-microdata supporting elements [TODO]
+
+Example 2a:  With inline binding
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello",
+        "isHappy": true
+    }'
+    be-sharing='
+        Share is happy from scope.
+    '
+>
+    <input -disabled=isHappy>
+</div>
+```
+
+Example 2b:  Without inline binding
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello",
+        "isHappy": true
+    }'
+    be-sharing='
+        Share is happy from scope to disabled property of input element.
+    '
+>
+    <input>
 </div>
 ```
 
