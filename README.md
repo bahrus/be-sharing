@@ -55,8 +55,8 @@ Example 2a:  With inline binding
         Share is happy, greeting from scope.
     '
 >
-    <link itemprop=isHappy to-disabled>
-    <meta itemprop=greeting to-value>
+    <link itemprop=isHappy -disabled>
+    <meta itemprop=greeting -value>
     <input>
 </div>
 ```
