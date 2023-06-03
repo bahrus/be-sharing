@@ -40,6 +40,32 @@ If there are multiple scope properties to share, list them with the comma delimi
 </div>
 ```
 
+<details>
+    <summary>Tiny typing reduction
+
+It's a bit redundant to type "beSharing / Share".
+
+Instead, this also works:
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello"
+    }'
+    be-sharing='
+        ^ count, greeting from scope.
+    '
+>
+    <data itemprop="count"></data>
+    <span itemprop="greeting"></span>
+</div>
+```
+
+</details>
+
+
+
 Example 2:  Share to properties of non-microdata supporting elements [TODO]
 
 Example 2a:  By name, id
@@ -75,7 +101,7 @@ Example 2b:  With inline binding
         Share is happy, greeting from scope.
     '
 >
-    <link itemprop=isHappy part=disabled>
+    <link itemprop=isHappy be-it=disabled>
     <meta itemprop=count part=maxLength>
     <input>
     <meta itemprop=description part=alt>

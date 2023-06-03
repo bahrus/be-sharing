@@ -9,6 +9,7 @@ export class BeSharing extends BE {
             cache: new Map(),
             primaryPropReq: true,
             parseAndCamelize: true,
+            defaultBucket: 'Share',
             // camelizeOptions: {
             //     booleans: ['Debug', 'Skip', 'Nudge']
             // },

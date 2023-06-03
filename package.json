@@ -21,8 +21,8 @@
     "be-enhanced": "0.0.24",
     "be-hive": "0.0.98",
     "be-linked": "0.0.12",
-    "trans-render": "0.0.683",
-    "xtal-element": "0.0.563"
+    "trans-render": "0.0.684",
+    "xtal-element": "0.0.564"
   },
   "devDependencies": {
     "be-scoped": "0.0.10",

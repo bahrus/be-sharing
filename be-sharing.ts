@@ -14,6 +14,7 @@ export class BeSharing extends BE<AP, Actions> implements Actions{
             cache: new Map<string, JSONValue>(),
             primaryPropReq: true,
             parseAndCamelize: true,
+            defaultBucket: 'Share',
             // camelizeOptions: {
             //     booleans: ['Debug', 'Skip', 'Nudge']
             // },
