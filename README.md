@@ -130,6 +130,7 @@ Example 5:  Share by name, id
 
 
 
+<!--
 
 Example 6:  Without inline binding [TODO]
 
@@ -146,8 +147,11 @@ Example 6:  Without inline binding [TODO]
     <img>
 </div>
 ```
+-->
 
->**Note:** Because the HTML may stream in slowly, we aren't guaranteed that *be-sharing* will be able to distribute everything on the first go.  To guarantee nothing is missed, add a *be-a-beacon* adorned element as the last child of the itemscope tag. (Hopefully the platform will resolve this issue soon.)  Alternative, adorn a script element at the bottom of the page, and put all the sharing statements there, as shown 
+Example 7:  Support for streaming HTML [Untested]
+
+>**Note:** Because the HTML may stream in slowly, we aren't guaranteed that *be-sharing* will be able to distribute everything on the first go.  To guarantee nothing is missed, add a *be-a-beacon* adorned element as the last child of the itemscope tag. (Hopefully the platform will resolve this issue soon.)  Alternative, adorn a script element at the bottom of the page, and put all the sharing statements there, as shown below
 
 ## Formatting
 
