@@ -68,7 +68,7 @@ Instead, this also works:
 
 We can share all properties from scope:
 
-## Example 3 [TODO]
+## Example 3
 
 ```html
 <div itemscope 
