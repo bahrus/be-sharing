@@ -85,7 +85,7 @@ We can share all properties from scope:
 </div>
 ```
 
-Example 4:  With inline binding [TODO]
+Example 4:  Sharing values to non microdata recognized properties with inline binding
 
 ```html
 <div itemscope 
@@ -95,7 +95,7 @@ Example 4:  With inline binding [TODO]
         "isHappy": true
     }'
     be-sharing='
-        Share is happy, count, description from scope.
+        Share * from scope.
     '
 >
     <link itemprop=isHappy be-it=disabled>
@@ -107,7 +107,7 @@ Example 4:  With inline binding [TODO]
 ```
 
 
-Example 5:  Share by name, id [TODO]
+Example 5:  Share by name, id
 
 ```html
 <div itemscope 
@@ -116,7 +116,9 @@ Example 5:  Share by name, id [TODO]
         "greeting": "hello"
     }'
     be-sharing='
-        ^ count, greeting from scope by itemprop, name, id.
+        ^ count, greeting from scope by itemprop.
+        ^ count from scope by name.
+        ^ greeting from scope by id.
     '
 >
     <data itemprop="count"></data>
