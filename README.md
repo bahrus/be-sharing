@@ -41,7 +41,8 @@ If there are multiple scope properties to share, list them with the comma delimi
 ```
 
 <details>
-    <summary>Tiny typing reduction
+    <summary>Tiny typing reduction</summary>
+    
 It's a bit redundant to type "beSharing / Share".
 
 Instead, this also works:
