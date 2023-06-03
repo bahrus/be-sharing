@@ -25,6 +25,8 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
 
 If there are multiple scope properties to share, list them with the comma delimiter.  For example:
 
+## Example 2
+
 ```html
 <div itemscope 
     be-scoped='{
@@ -64,11 +66,9 @@ Instead, this also works:
 
 </details>
 
+We can share all properties from scope:
 
-
-Example 2:  Share to properties of non-microdata supporting elements [TODO]
-
-Example 2a:  By name, id
+## Example 3 [TODO]
 
 ```html
 <div itemscope 
@@ -77,7 +77,46 @@ Example 2a:  By name, id
         "greeting": "hello"
     }'
     be-sharing='
-        Share count, greeting from scope by itemprop, name, id.
+        Share * from scope.
+    '
+>
+    <data itemprop="count"></data>
+    <span itemprop="greeting"></span>
+</div>
+```
+
+Example 4:  With inline binding [TODO]
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "description": "Mr. Banks flying a kite with his kids.",
+        "isHappy": true
+    }'
+    be-sharing='
+        Share is happy, count, description from scope.
+    '
+>
+    <link itemprop=isHappy be-it=disabled>
+    <meta itemprop=count be-it=maxLength>
+    <input>
+    <meta itemprop=description be-it=alt>
+    <img>
+</div>
+```
+
+
+Example 5:  Share by name, id [TODO]
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello"
+    }'
+    be-sharing='
+        ^ count, greeting from scope by itemprop, name, id.
     '
 >
     <data itemprop="count"></data>
@@ -88,28 +127,9 @@ Example 2a:  By name, id
 ```
 
 
-Example 2b:  With inline binding
 
-```html
-<div itemscope 
-    be-scoped='{
-        "count": 30,
-        "description": "Mr. Banks flying a kite with his kids.",
-        "isHappy": true
-    }'
-    be-sharing='
-        Share is happy, greeting from scope.
-    '
->
-    <link itemprop=isHappy be-it=disabled>
-    <meta itemprop=count part=maxLength>
-    <input>
-    <meta itemprop=description part=alt>
-    <img>
-</div>
-```
 
-Example 2c:  Without inline binding
+Example 6:  Without inline binding [TODO]
 
 ```html
 <div itemscope 
