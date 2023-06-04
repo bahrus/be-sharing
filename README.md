@@ -128,6 +128,7 @@ Example 5:  Share by name, id
 </div>
 ```
 
+However, unlike using itemscope, this is "one way binding".  be-derived provides no hydrating support for deriving data by id or name.
 
 
 <!--
@@ -192,7 +193,7 @@ Specify:
 ```html
 <my-custom-element-no-shadow itemscope be-sharing='
     Share $0:numberOfWidgets as count.
-    Sharre $0:greetingsAndSalutations:monday:morningMessage as greeting.
+    Share $0:greetingsAndSalutations:monday:morningMessage as greeting.
 '>
     <data itemprop=count></data>
     <span itemprop=greeting></span>
@@ -209,6 +210,7 @@ What this opens up is an interesting breed of custom elements:  Custom elements 
 
 Another scenario:  The custom element does have Shadow DOM, which the internal custom element takes care of binding to, but expects (or allows for) some interplay between some of the properties it supports and the light children, again leaving that up to the developer/consumer.  Essentially, the "encapsulation" model is softened somewhat to allow the light children to engage in the state of the custom element.
 
+<!-- move this to be-piped 
 ## Acting on shared scope changes [TODO]
 
 ```html
@@ -222,12 +224,12 @@ Another scenario:  The custom element does have Shadow DOM, which the internal c
 >
     <span itemprop="count"></span>
     <script be-sharing='
-        Pipe count to do something.
+        Pipe count from scope to do something.
     '>
         export function doSomething({count, scope, scopedElement}){
 
         }
-    <script>
+    </script>
 </div>
 ```
-
+-->
