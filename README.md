@@ -85,6 +85,9 @@ We can share all properties from scope:
 </div>
 ```
 
+[TODO]  Search for itemprops within the scope, rather than what it is doing, to get the list.
+[TODO]  Make Share * from $parent be the default.
+
 Example 4:  Sharing values to non microdata recognized properties with inline binding
 
 ```html
@@ -190,6 +193,16 @@ Specify:
 
 If the custom element we want to observe is the host element that uses shadowDOM, replace "$0" with "host".
 
+If  Share * from $parent, uses itemprop property to get ... [TODO]
+
+## Sharing sub obj [TODO]
+
+If be-sharing shares an object, and the target has an itemscope attribute, 
+
+1. Automatically creates a be-scoped, and assigns the properties to it.
+
+
+
 ## Flattening/mapping properties from a custom element to scope [TODO]
 
 ```html
@@ -235,3 +248,20 @@ Another scenario:  The custom element does have Shadow DOM, which the internal c
 </div>
 ```
 -->
+
+<!--
+
+How to use with trans-render:
+
+query every itemscope
+
+lhs is still match (on top of itemscope).  So could be *.
+
+Simply provide list of properties to bind:
+
+Share count.
+
+
+-->
+
+test
