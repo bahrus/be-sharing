@@ -174,9 +174,9 @@ However, that is only the default setting.  Behind the scenes, *be-sharing* is m
 
 
 
-## Sharing values from a custom element [WIP]
+## Sharing values from a custom element
 
-*be-sharing* can also work well together with custom elements that use standard property getters/setters:
+*be-sharing* can also work well together with custom elements that use standard property getters/setters.
 
 Specify:
 
@@ -187,6 +187,8 @@ Specify:
     <span itemprop="count"></span>
 </my-custom-element-no-shadow>
 ```
+
+If the custom element we want to observe is the host element that uses shadowDOM, replace "$0" with "host".
 
 ## Flattening/mapping properties from a custom element to scope [TODO]
 
