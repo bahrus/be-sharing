@@ -171,18 +171,7 @@ However, that is only the default setting.  Behind the scenes, *be-sharing* is m
 <data itemprop=count lang=de-DE be-intl='{ "style": "currency", "currency": "EUR" }'></data>
 ```
 
-## What be-sharing is doing
 
-What be-sharing (with statement "Share count from scope.") is doing can best be explained by words:
-
-1.  ~~Find the nearest element ancestor with an itemscope attribute (starting from the adorned element).~~ Only do this if adorning the script element.
-2.  Observe the be-scoped object that adorns the element with the itemscope attribute.
-3.  When the count property of the be-scoped object changes, pass the value of count to all elements within the itemscope which has attribute itemprop = count.
-
-
-So *be-sharing* is basically breathing life into the [microdata standard](https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata).
-
-The sentence structure contained inside the be-sharing attribute is adopting what we dub ["Hemingway Notation"](https://bookanalysis.com/ernest-hemingway/writing-style/).
 
 ## Sharing values from a custom element [WIP]
 
@@ -202,9 +191,8 @@ Specify:
 
 ```html
 <my-custom-element-no-shadow itemscope be-sharing='
-    Echo $0:numberOfWidgets to scope:count.
-    Echo $0:greetingsAndSalutations:monday:morningMessage to scope:greeting.
-    Share count, greeting from scope.
+    Share $0:numberOfWidgets as count.
+    Sharre $0:greetingsAndSalutations:monday:morningMessage as greeting.
 '>
     <data itemprop=count></data>
     <span itemprop=greeting></span>
