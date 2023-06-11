@@ -85,6 +85,10 @@ We can share all properties from scope:
 </div>
 ```
 
+What this does:  Searches for all itemprop attributes, forms the list of names from all matches (outside child itemscopes).
+
+This also works with $0, host, $parent (discussed below).
+
 [TODO]  Search for itemprops within the scope, rather than what it is doing, to get the list.
 [TODO]  Make Share * from $parent be the default.
 
@@ -193,9 +197,27 @@ Specify:
 
 If the custom element we want to observe is the host element that uses shadowDOM, replace "$0" with "host".
 
-If  Share * from $parent, uses itemprop property to get ... [TODO]
+## A DOM element that receives an object
 
-## Sharing sub obj [TODO]
+When we pass things via the itemprop attribute, one significant scenario to consider is what happens if an object is passed.
+
+There are a number of scenarios to consider.
+
+In the example below, let's assume the itemprop attribute we are passing to is called myObjProp.  Suppose the object has a subObj field/property that we want to share.
+
+|                     Scenario                              |                What Happens                            |                  How to access                   |
+|-----------------------------------------------------------|--------------------------------------------------------|--------------------------------------------------|
+| 1. Target DOM element is meta tag.  Else:                 |  Object passed to value of be-it enhancement.          | Value of be-it will specify prop to forward to.  |
+| 2. Target DOM element doesn't have an itemscope attribute |  Object is JSON.stringified to textContent.            | No access                                        |
+| 3. Object is a non array instance of a class              |  Propagating object passed into scope.                 | Share myObjProp:subObj from props [as propName]  |
+| 4. Object is a non array, non instance of a class         |  Object is assigned into scope                         | Share myObjProp:subObj from scope [as propName]  |
+| 5. Object is an array                                     |  be-repeated is invoked                                | Use itemprop=itemListElement                     |
+
+>**Note:** With scenario 3, updates will only happen when the full object (myObjProp) is replaced.
+>**Note:** With scenario 2, updates happen as property getter/setters are updated inside the object.
+
+
+## Sharing sub obj
 
 If be-sharing shares an object, and the target has an itemscope attribute, 
 
@@ -203,7 +225,7 @@ If be-sharing shares an object, and the target has an itemscope attribute,
 
 
 
-## Flattening/mapping properties from a custom element to scope [TODO]
+## Flattening/mapping properties from a custom element to scope
 
 ```html
 <my-custom-element-no-shadow itemscope be-sharing='
@@ -224,6 +246,57 @@ What this opens up is an interesting breed of custom elements:  Custom elements 
 ### Use Case 2:  Shared state web components
 
 Another scenario:  The custom element does have Shadow DOM, which the internal custom element takes care of binding to, but expects (or allows for) some interplay between some of the properties it supports and the light children, again leaving that up to the developer/consumer.  Essentially, the "encapsulation" model is softened somewhat to allow the light children to engage in the state of the custom element.
+
+## Loops
+
+Preliminary support for loops is now provided.  Example markup:
+
+```html
+<paul-mccartney>
+    <template>
+        <div itemscope be-linked='
+            Share * from host.
+        '>
+            <span itemprop="age"></span>
+            <div itemscope itemprop="songs">
+                <div aria-rowindex=0 itemscope itemprop="itemListElement" be-linked='
+                    Share * from props.
+                '>
+                    <span itemprop="name"></span>
+                </div>
+            </div>
+                
+
+        </div>
+        <be-hive></be-hive>
+    </template>
+</paul-mccartney>
+```
+
+The markup above is based on [this vocabulary](https://schema.org/ItemList).  For now, there is no check that the itemprop="itemListElement" matches the itemtype specified in the link.  But to be safe for possible future backwards incompatible changes, please include the itemtype:
+
+
+```html
+<paul-mccartney>
+    <template>
+        <div itemscope be-linked='
+            Share * from host.
+        '>
+            <span itemprop="age"></span>
+            <div itemscope itemprop="songs" itemtype="https://schema.org/ItemList">
+                <div aria-rowindex=0 itemscope itemprop="itemListElement" be-linked='
+                    Share * from props.
+                '>
+                    <span itemprop="name"></span>
+                </div>
+            </div>
+                
+
+        </div>
+        <be-hive></be-hive>
+    </template>
+</paul-mccartney>
+```
 
 <!-- move this to be-piped 
 ## Acting on shared scope changes [TODO]
