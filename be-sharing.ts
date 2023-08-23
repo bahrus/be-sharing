@@ -2,9 +2,10 @@ import {BE, propDefaults, propInfo} from 'be-enhanced/BE.js';
 import {BEConfig} from 'be-enhanced/types';
 import {XE} from 'xtal-element/XE.js';
 import {Actions, AllProps, AP, PAP, ProPAP, POA} from './types';
-import {SharingCamelConfig, CanonicalConfig, Settings} from 'be-linked/types';
+import {SharingCamelConfig, CanonicalConfig, Settings, IP} from 'be-linked/types';
 import {register} from 'be-hive/register.js';
 import {JSONValue} from 'trans-render/lib/types';
+import { BVAAllProps } from 'be-value-added/types';
 
 export class BeSharing extends BE<AP, Actions> implements Actions{
     static override get beConfig(){
@@ -71,6 +72,37 @@ export class BeSharing extends BE<AP, Actions> implements Actions{
         return {
             resolved: true
         };
+    }
+
+    async share(bva: BVAAllProps, name: string, value: any, prevMatches?: IP[]){
+        const {getIPsInScope} = await import('be-linked/getIPsInScope.js');
+        const {enhancedElement} = this;
+        let matches = prevMatches;
+        if(matches === undefined){
+            const ips = getIPsInScope(enhancedElement);
+            const matches = ips.filter(x => x.names.includes(name));
+            if(matches.length === 0){
+                let localName = 'meta';
+                switch(typeof value){
+                    case 'boolean':
+                        localName = 'link';
+                        break;
+                }
+                const newEl = document.createElement(localName);
+                newEl.setAttribute('itemprop', name);
+                enhancedElement.appendChild(newEl);
+                matches.push({
+                    el: newEl,
+                    names: [name]
+                });
+            }
+        }
+        for(const match of matches!){
+            const el = match.el;
+            const bvaTarget = await (<any>el).beEnhanced.whenAttached('be-value-added') as BVAAllProps;
+            bvaTarget.value = value;
+        }
+        return matches;
     }
 }
 

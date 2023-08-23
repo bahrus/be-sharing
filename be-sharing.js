@@ -60,6 +60,36 @@ export class BeSharing extends BE {
             resolved: true
         };
     }
+    async share(bva, name, value, prevMatches) {
+        const { getIPsInScope } = await import('be-linked/getIPsInScope.js');
+        const { enhancedElement } = this;
+        let matches = prevMatches;
+        if (matches === undefined) {
+            const ips = getIPsInScope(enhancedElement);
+            const matches = ips.filter(x => x.names.includes(name));
+            if (matches.length === 0) {
+                let localName = 'meta';
+                switch (typeof value) {
+                    case 'boolean':
+                        localName = 'link';
+                        break;
+                }
+                const newEl = document.createElement(localName);
+                newEl.setAttribute('itemprop', name);
+                enhancedElement.appendChild(newEl);
+                matches.push({
+                    el: newEl,
+                    names: [name]
+                });
+            }
+        }
+        for (const match of matches) {
+            const el = match.el;
+            const bvaTarget = await el.beEnhanced.whenAttached('be-value-added');
+            bvaTarget.value = value;
+        }
+        return matches;
+    }
 }
 const cachedCanonicals = {};
 const tagName = 'be-sharing';
