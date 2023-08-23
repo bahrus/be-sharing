@@ -20,7 +20,7 @@
   "dependencies": {
     "be-enhanced": "0.0.42",
     "be-hive": "0.0.116",
-    "be-linked": "0.0.40",
+    "be-linked": "0.0.41",
     "trans-render": "0.0.703",
     "xtal-element": "0.0.577"
   },
