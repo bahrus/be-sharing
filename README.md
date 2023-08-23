@@ -2,7 +2,7 @@
 
 >**Note**: This enhancement works best with browsers that support the @scope css selector.
 
-Share values from (enhancements of) the adorned element to other neighboring DOM (custom) elements, specializing, but not limited to, microdata enhanced elements.
+Share values from (enhancements of) the adorned element to other neighboring DOM (custom) elements, specializing in, but not limited to, microdata enhanced elements.
 
 be-sharing is one DOM custom enhancement among a triumvirate of enhancements that rollup to [be-hydrated](https://github.com/bahrus/be-hydrated).
 
