@@ -6,7 +6,7 @@ Share values from (enhancements of) the adorned element to other neighboring DOM
 
 be-sharing is one DOM custom enhancement among a triumvirate of enhancements that rollup to [be-hydrated](https://github.com/bahrus/be-hydrated).
 
-## Example 1
+## Example 1a
 
 *be-sharing* works nicely together with https://github.com/bahrus/be-scoped
 
@@ -23,9 +23,24 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
 </div>
 ```
 
+
+## Example 1b [TODO]
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30
+    }'
+    be-sharing='
+        Of %count.
+    '
+>
+    <data itemprop="count"></data>
+</div>
+```
+
 If there are multiple scope properties to share, list them with the comma delimiter.  For example:
 
-## Example 2
+## Example 2a
 
 ```html
 <div itemscope 
@@ -35,6 +50,23 @@ If there are multiple scope properties to share, list them with the comma delimi
     }'
     be-sharing='
         Share count, greeting from scope.
+    '
+>
+    <data itemprop="count"></data>
+    <span itemprop="greeting"></span>
+</div>
+```
+
+## Example 2b [TODO]
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello"
+    }'
+    be-sharing='
+        Of %count, %greeting.
     '
 >
     <data itemprop="count"></data>
@@ -114,7 +146,7 @@ Example 4:  Sharing values to non microdata recognized properties with inline bi
 ```
 
 
-Example 5:  Share by name, id
+Example 5a:  Share by name, id
 
 ```html
 <div itemscope 
@@ -136,6 +168,27 @@ Example 5:  Share by name, id
 ```
 
 However, unlike using itemscope, this is "one way binding".  be-derived provides no hydrating support for deriving data by id or name.
+
+Example 5b:  Share by name, id
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello"
+    }'
+    be-sharing='
+        Of %count$, %greeting$.
+        ^ %count@.
+        ^ %greeting#.
+    '
+>
+    <data itemprop="count"></data>
+    <span itemprop="greeting"></span>
+    <input name="count" type=number>
+    <div id=greeting></div>
+</div>
+```
 
 
 <!--
