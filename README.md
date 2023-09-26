@@ -169,7 +169,7 @@ Example 5a:  Share by name, id
 
 However, unlike using itemscope, this is "one way binding".  be-derived provides no hydrating support for deriving data by id or name.
 
-Example 5b:  Share by name, id
+Example 5b:  Share by name, id [TODO]
 
 ```html
 <div itemscope 
