@@ -120,10 +120,9 @@ Example 5a:  Share by name, id
         "count": 30,
         "greeting": "hello"
     }'
-    be-sharing='
-        ^ count, greeting from scope by itemprop.
-        ^ count from scope by name.
-        ^ greeting from scope by id.
+    be-sharing='of %count, %greeting.
+        Of %count by name.
+        Of %greeting by id.
     '
 >
     <data itemprop="count"></data>
@@ -133,7 +132,6 @@ Example 5a:  Share by name, id
 </div>
 ```
 
-However, unlike using itemscope, this is "one way binding".  be-derived provides no hydrating support for deriving data by id or name.
 
 Example 5b:  Share by name, id [TODO]
 
@@ -143,10 +141,9 @@ Example 5b:  Share by name, id [TODO]
         "count": 30,
         "greeting": "hello"
     }'
-    be-sharing='
-        Of %count$, %greeting$.
-        ^ %count@.
-        ^ %greeting#.
+    be-sharing='of %count$, %greeting$.
+        Of %count@.
+        Of %greeting#.
     '
 >
     <data itemprop="count"></data>
@@ -204,12 +201,10 @@ However, that is only the default setting.  Behind the scenes, *be-sharing* is m
 
 *be-sharing* can also work well together with custom elements that use standard property getters/setters.
 
-Specify:
+Specify: [TODO]
 
 ```html
-<my-custom-element-no-shadow itemscope be-sharing='
-    Share count from $0.
-'>
+<my-custom-element-no-shadow itemscope be-sharing='of count from $0.'>
     <span itemprop="count"></span>
 </my-custom-element-no-shadow>
 ```
@@ -244,12 +239,11 @@ If be-sharing shares an object, and the target has an itemscope attribute,
 
 
 
-## Flattening/mapping properties from a custom element to scope
+## Flattening/mapping properties from a custom element to scope [TODO]
 
 ```html
-<my-custom-element-no-shadow itemscope be-sharing='
-    Share $0:numberOfWidgets as count.
-    Share $0:greetingsAndSalutations:monday:morningMessage as greeting.
+<my-custom-element-no-shadow itemscope be-sharing='of $0:numberOfWidgets as count.
+    Of $0:greetingsAndSalutations:monday:morningMessage as greeting.
 '>
     <data itemprop=count></data>
     <span itemprop=greeting></span>
@@ -266,26 +260,20 @@ What this opens up is an interesting breed of custom elements:  Custom elements 
 
 Another scenario:  The custom element does have Shadow DOM, which the internal custom element takes care of binding to, but expects (or allows for) some interplay between some of the properties it supports and the light children, again leaving that up to the developer/consumer.  Essentially, the "encapsulation" model is softened somewhat to allow the light children to engage in the state of the custom element.
 
-## Loops
+## Loops [TODO]
 
 Preliminary support for loops is now provided.  Example markup:
 
 ```html
 <paul-mccartney>
     <template>
-        <div itemscope be-linked='
-            Share * from host.
-        '>
+        <div itemscope be-sharing='of * from host.'>
             <span itemprop="age"></span>
             <div itemscope itemprop="songs">
-                <div aria-rowindex=0 itemscope itemprop="itemListElement" be-linked='
-                    Share * from props.
-                '>
+                <div aria-rowindex=0 itemscope itemprop="itemListElement" be-sharing='of * from props.'>
                     <span itemprop="name"></span>
                 </div>
             </div>
-                
-
         </div>
         <be-hive></be-hive>
     </template>
@@ -298,14 +286,10 @@ The markup above is based on [this vocabulary](https://schema.org/ItemList).  Fo
 ```html
 <paul-mccartney>
     <template>
-        <div itemscope be-linked='
-            Share * from host.
-        '>
+        <div itemscope be-sharing='of * from host.'>
             <span itemprop="age"></span>
             <div itemscope itemprop="songs" itemtype="https://schema.org/ItemList">
-                <div aria-rowindex=0 itemscope itemprop="itemListElement" be-linked='
-                    Share * from props.
-                '>
+                <div aria-rowindex=0 itemscope itemprop="itemListElement" be-sharing='of * from props.'>
                     <span itemprop="name"></span>
                 </div>
             </div>
