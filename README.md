@@ -6,7 +6,7 @@ Share values from (enhancements of) the adorned element to other neighboring DOM
 
 be-sharing is one DOM custom enhancement among a triumvirate of enhancements that rollup to [be-hydrated](https://github.com/bahrus/be-hydrated).
 
-## Example 1a
+## Example 1a [TODO]
 
 *be-sharing* works nicely together with https://github.com/bahrus/be-scoped
 
@@ -15,8 +15,7 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
     be-scoped='{
         "count": 30
     }'
-    be-sharing='
-        Share count from scope.
+    be-sharing='of count from scope.
     '
 >
     <data itemprop="count"></data>
@@ -30,9 +29,7 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
     be-scoped='{
         "count": 30
     }'
-    be-sharing='
-        Of %count.
-    '
+    be-sharing='of %count.'
 >
     <data itemprop="count"></data>
 </div>
@@ -40,7 +37,7 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
 
 If there are multiple scope properties to share, list them with the comma delimiter.  For example:
 
-## Example 2a
+## Example 2a [TODO]
 
 ```html
 <div itemscope 
@@ -48,9 +45,7 @@ If there are multiple scope properties to share, list them with the comma delimi
         "count": 30,
         "greeting": "hello"
     }'
-    be-sharing='
-        Share count, greeting from scope.
-    '
+    be-sharing='of %count, %greeting.'
 >
     <data itemprop="count"></data>
     <span itemprop="greeting"></span>
@@ -65,38 +60,13 @@ If there are multiple scope properties to share, list them with the comma delimi
         "count": 30,
         "greeting": "hello"
     }'
-    be-sharing='
-        Of %count, %greeting.
-    '
+    be-sharing='of %count, %greeting.'
 >
     <data itemprop="count"></data>
     <span itemprop="greeting"></span>
 </div>
 ```
 
-<details>
-    <summary>Tiny typing reduction</summary>
-    
-It's a bit redundant to type "beSharing / Share".
-
-Instead, this also works:
-
-```html
-<div itemscope 
-    be-scoped='{
-        "count": 30,
-        "greeting": "hello"
-    }'
-    be-sharing='
-        ^ count, greeting from scope.
-    '
->
-    <data itemprop="count"></data>
-    <span itemprop="greeting"></span>
-</div>
-```
-
-</details>
 
 We can share all properties from scope:
 
@@ -108,9 +78,7 @@ We can share all properties from scope:
         "count": 30,
         "greeting": "hello"
     }'
-    be-sharing='
-        Share * from scope.
-    '
+    be-sharing='of * from scope.'
 >
     <data itemprop="count"></data>
     <span itemprop="greeting"></span>
@@ -124,7 +92,7 @@ This also works with $0, host, $parent (discussed below).
 [TODO]  Search for itemprops within the scope, rather than what it is doing, to get the list.
 [TODO]  Make Share * from $parent be the default.
 
-Example 4:  Sharing values to non microdata recognized properties with inline binding
+Example 4:  Sharing values to non microdata recognized properties with inline binding [TODO]
 
 ```html
 <div itemscope 
@@ -133,15 +101,13 @@ Example 4:  Sharing values to non microdata recognized properties with inline bi
         "description": "Mr. Banks flying a kite with his kids.",
         "isHappy": true
     }'
-    be-sharing='
-        Share * from scope.
-    '
+    be-sharing='of * from scope.'
 >
-    <link itemprop=isHappy be-it=disabled>
-    <meta itemprop=count be-it=maxLength>
-    <input>
-    <meta itemprop=description be-it=alt>
-    <img>
+    <link itemprop=isHappy>
+    <meta itemprop=count>
+    <input be-observant='of $isHappy as disabled. Of $count as maxLength.'>
+    <meta itemprop=description>
+    <img be-observant='of $description as alt.'>
 </div>
 ```
 
