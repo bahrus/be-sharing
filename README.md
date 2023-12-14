@@ -23,7 +23,7 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
 ```
 
 > [!Note]
-> The most thing about be-scoped is it makes it eas to document examples for this enhancement.  However, in practice, it may be much more common to use other options.  If no "from" is specified, it will, by default to the values from the "host(ish)", as we will see much farther down in this document.
+> The most attractive thing about be-scoped here is that it makes it easy to document examples for this enhancement.  However, in practice, it may be much more common to use other options.  For example, if no "from" is specified, it will, by default to the values from the "host(ish)", as we will see much farther down in this document.
 
 
 If there are multiple scope properties to share, list them with the comma delimiter.  For example:
@@ -134,10 +134,10 @@ Example 1f:  With DTR transform support [TODO]
     }'
     be-sharing='of count, greeting from $0+beScoped via xform.'
     data-xform='{
-        "$count": "count",
-        "$greeting": "greeting",
-        "@count": "count",
-        "#greeting": "greeting"
+        "$ count": "count",
+        "$ greeting": "greeting",
+        "@ count": "count",
+        "# greeting": "greeting"
     }'
 >
     <data itemprop="count"></data>
