@@ -15,7 +15,7 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
     be-scoped='{
         "count": 30
     }'
-    be-sharing='of count from scope.
+    be-sharing='of count from $0+beScoped.
     '
 >
     <data itemprop="count"></data>
@@ -23,21 +23,11 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
 ```
 
 
-## Example 1b [TODO]
-```html
-<div itemscope 
-    be-scoped='{
-        "count": 30
-    }'
-    be-sharing='of %count.'
->
-    <data itemprop="count"></data>
-</div>
-```
+
 
 If there are multiple scope properties to share, list them with the comma delimiter.  For example:
 
-## Example 2a [TODO]
+## Example 1b [TODO]
 
 ```html
 <div itemscope 
@@ -45,22 +35,7 @@ If there are multiple scope properties to share, list them with the comma delimi
         "count": 30,
         "greeting": "hello"
     }'
-    be-sharing='of %count, %greeting.'
->
-    <data itemprop="count"></data>
-    <span itemprop="greeting"></span>
-</div>
-```
-
-## Example 2b [TODO]
-
-```html
-<div itemscope 
-    be-scoped='{
-        "count": 30,
-        "greeting": "hello"
-    }'
-    be-sharing='of %count, %greeting.'
+    be-sharing='of count, greeting from $0+beScoped.'
 >
     <data itemprop="count"></data>
     <span itemprop="greeting"></span>
@@ -68,9 +43,10 @@ If there are multiple scope properties to share, list them with the comma delimi
 ```
 
 
-We can share all properties from scope:
 
-## Example 3
+We can share all properties from scope to elements that opt-in:
+
+## Example 1c
 
 ```html
 <div itemscope 
@@ -78,7 +54,7 @@ We can share all properties from scope:
         "count": 30,
         "greeting": "hello"
     }'
-    be-sharing='of * from scope.'
+    be-sharing='of * from $0+beScoped.'
 >
     <data itemprop="count"></data>
     <span itemprop="greeting"></span>
@@ -88,6 +64,21 @@ We can share all properties from scope:
 What this does:  Searches for all itemprop attributes, forms the list of names from all matches (outside child itemscopes).
 
 This also works with $0, host, $parent (discussed below).
+
+## Example 1d -- opt-in wild card sharing
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello"
+    }'
+    be-sharing='of * from $0+beScoped matching [✋].'
+>
+    <data ✋ itemprop="count"></data>
+    <span itemprop="greeting"></span>
+</div>
+```
 
 [TODO]  Search for itemprops within the scope, rather than what it is doing, to get the list.
 [TODO]  Make Share * from $parent be the default.
