@@ -83,7 +83,7 @@ This also works with $0, host, $parent (discussed below).
 [TODO]  Search for itemprops within the scope, rather than what it is doing, to get the list.
 [TODO]  Make Share * from $parent be the default.
 
-Example 4:  Sharing values to non microdata recognized properties with inline binding [TODO]
+<!--Example 4:  Sharing values to non microdata recognized properties with inline binding [TODO]
 
 ```html
 <div itemscope 
@@ -92,7 +92,7 @@ Example 4:  Sharing values to non microdata recognized properties with inline bi
         "description": "Mr. Banks flying a kite with his kids.",
         "isHappy": true
     }'
-    be-sharing='of * from scope.'
+    be-sharing='of * from $0+beScoped.'
 >
     <link itemprop=isHappy>
     <meta itemprop=count>
@@ -101,9 +101,9 @@ Example 4:  Sharing values to non microdata recognized properties with inline bi
     <img be-observant='of $description as alt.'>
 </div>
 ```
+-->
 
-
-Example 5a:  Share by name, id
+Example 1e:  Share by name, id
 
 ```html
 <div itemscope 
@@ -111,9 +111,9 @@ Example 5a:  Share by name, id
         "count": 30,
         "greeting": "hello"
     }'
-    be-sharing='of %count, %greeting.
-        Of %count by name.
-        Of %greeting by id.
+    be-sharing='of count, greeting from $0+beScoped.
+        Of count by name from $0+beScoped.
+        Of greeting by id from $0+beScoped.
     '
 >
     <data itemprop="count"></data>
@@ -123,8 +123,30 @@ Example 5a:  Share by name, id
 </div>
 ```
 
+Example 1f:  With DTR transform support [TODO]
 
-Example 5b:  Share by name, id [TODO]
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello"
+    }'
+    be-sharing='of count, greeting from $0+beScoped with xform.'
+    data-xform='{
+        "$count": "count",
+        "$greeting": "greeting",
+        "@count": "count",
+        "#greeting": "greeting"
+    }'
+>
+    <data itemprop="count"></data>
+    <span itemprop="greeting"></span>
+    <input name="count" type=number>
+    <div id=greeting></div>
+</div>
+```
+
+<!--Example 5b:  Share by name, id [TODO]
 
 ```html
 <div itemscope 
@@ -143,7 +165,7 @@ Example 5b:  Share by name, id [TODO]
     <div id=greeting></div>
 </div>
 ```
-
+-->
 
 <!--
 
