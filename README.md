@@ -238,12 +238,14 @@ However, that is only the default setting.  Behind the scenes, *be-sharing* is m
 Specify: [TODO]
 
 ```html
-<my-custom-element-no-shadow itemscope be-sharing='of count from $0.'>
+<my-custom-element-no-shadow itemscope be-sharing='of count.'>
     <span itemprop="count"></span>
 </my-custom-element-no-shadow>
 ```
 
 If the custom element we want to observe is the host element that uses shadowDOM, replace "$0" with "host".
+
+What this opens up, potentially, is an interesting kind of custom element -- a custom element that only manages state, with no rendering / ui.  The UI is derived on the fly from the light children, where *be-sharing* is used to bind the state to the ui.  Or at least part of the ui is handled this way.
 
 ## A DOM element that receives an object
 
