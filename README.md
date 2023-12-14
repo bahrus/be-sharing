@@ -131,7 +131,7 @@ Example 1f:  With DTR transform support [TODO]
         "count": 30,
         "greeting": "hello"
     }'
-    be-sharing='of count, greeting from $0+beScoped with xform.'
+    be-sharing='of count, greeting from $0+beScoped via xform.'
     data-xform='{
         "$count": "count",
         "$greeting": "greeting",
@@ -186,9 +186,30 @@ Example 6:  Without inline binding [TODO]
 ```
 -->
 
-Example 7:  Support for streaming HTML [Untested]
+Example 1g:  Support for streaming HTML [TODO]
 
->**Note:** Because the HTML may stream in slowly, we aren't guaranteed that *be-sharing* will be able to distribute everything on the first go.  To guarantee nothing is missed, add a *be-a-beacon* adorned element as the last child of the itemscope tag. (Hopefully the platform will resolve this issue soon.)  Alternative, adorn a script element at the bottom of the page, and put all the sharing statements there, as shown below
+>**Note:** Because the HTML may stream in slowly, we aren't guaranteed that *be-sharing* will be able to distribute everything on the first go.  To guarantee nothing is missed *be-sharing* supports utilizing the [mount api](https://github.com/WICG/webcomponents/issues/896).  Because this imposes a bit of a cost, this needs to be an opt-in decision.  Specify this by adding "with vigilance" at the end:
+
+```html
+<div itemscope 
+    be-scoped='{
+        "count": 30,
+        "greeting": "hello"
+    }'
+    be-sharing='of count, greeting from $0+beScoped via xform with vigilance.'
+    data-xform='{
+        "$count": "count",
+        "$greeting": "greeting",
+        "@count": "count",
+        "#greeting": "greeting"
+    }'
+>
+    <data itemprop="count"></data>
+    <span itemprop="greeting"></span>
+    <input name="count" type=number>
+    <div id=greeting></div>
+</div>
+```
 
 ## Formatting
 
