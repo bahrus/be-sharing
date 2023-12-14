@@ -22,7 +22,8 @@ be-sharing is one DOM custom enhancement among a triumvirate of enhancements tha
 </div>
 ```
 
-
+> [!Note]
+> The most thing about be-scoped is it makes it eas to document examples for this enhancement.  However, in practice, it may be much more common to use other options.  If no "from" is specified, it will, by default to the values from the "host(ish)", as we will see much farther down in this document.
 
 
 If there are multiple scope properties to share, list them with the comma delimiter.  For example:
