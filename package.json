@@ -18,17 +18,17 @@
     "types.d.ts"
   ],
   "dependencies": {
-    "be-enhanced": "0.0.42",
-    "be-hive": "0.0.116",
-    "be-linked": "0.0.41",
-    "be-value-added": "0.0.2",
-    "trans-render": "0.0.703",
-    "xtal-element": "0.0.577"
+    "be-enhanced": "0.0.57",
+    "be-hive": "0.0.128",
+    "be-linked": "0.0.70",
+    "be-value-added": "0.0.19",
+    "trans-render": "0.0.719",
+    "xtal-element": "0.0.580"
   },
   "devDependencies": {
-    "be-scoped": "0.0.17",
-    "may-it-serve": "0.0.5",
-    "@playwright/test": "1.37.1"
+    "be-scoped": "0.0.21",
+    "may-it-serve": "0.0.6",
+    "@playwright/test": "1.40.1"
   },
   "scripts": {
     "serve": "node node_modules/may-it-serve/serve.js",

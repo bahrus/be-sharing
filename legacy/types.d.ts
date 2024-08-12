@@ -1,6 +1,6 @@
 import { ActionOnEventConfigs } from "trans-render/froop/types";
 import {IBE, Declarations} from 'be-enhanced/types';
-import {SharingCamelConfig, CanonicalConfig} from '../be-linked/types';
+import {SharingCamelConfig, CanonicalConfig} from '../../be-linked/types';
 
 export interface EndUserProps extends IBE {
     camelConfig?: SharingCamelConfig | SharingCamelConfig[],
