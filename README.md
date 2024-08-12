@@ -34,3 +34,6 @@ What this does:
 
 1.  Applies [be-gingerly](https://github.com/bahrus/be-gingerly) to the element adorned by the attribute.
 2.  One way binds from the all the itemscope host-ish's to the microdata adorned elements.
+
+> [!Note]
+> This enhancement works best with browsers that support the @scope css selector.
