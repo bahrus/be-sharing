@@ -7,7 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <div itemscope be-scoped='{
+    <script>
+        class MyCounter extends HTMLElement{
+            #count = 30;
+            get count(){
+                return this.#count;
+            }
+            set count(nv){
+                this.#count = nv;
+            }
+        }
+        customElements.define('my-counter');
+    </script>
+    <div itemscope=my-counter be-scoped='{
             "count": 30
         }'
         be-sharing='

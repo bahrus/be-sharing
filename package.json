@@ -14,21 +14,19 @@
     ".": "./be-sharing.js"
   },
   "files": [
-    "*.js",
-    "types.d.ts"
+    "*.js"
   ],
   "dependencies": {
-    "be-enhanced": "0.0.57",
-    "be-hive": "0.0.128",
-    "be-linked": "0.0.70",
-    "be-value-added": "0.0.19",
-    "trans-render": "0.0.719",
-    "xtal-element": "0.0.580"
+    "be-enhanced": "0.0.133",
+    "be-gingerly": "0.0.5",
+    "be-hive": "0.0.202",
+    "mount-observer": "0.0.34",
+    "trans-render": "0.0.825"
   },
   "devDependencies": {
-    "be-scoped": "0.0.21",
-    "may-it-serve": "0.0.6",
-    "@playwright/test": "1.40.1"
+    "be-scoped": "0.0.43",
+    "may-it-serve": "0.0.8",
+    "@playwright/test": "1.46.1"
   },
   "scripts": {
     "serve": "node node_modules/may-it-serve/serve.js",
