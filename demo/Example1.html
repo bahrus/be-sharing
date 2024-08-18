@@ -19,14 +19,12 @@
         }
         customElements.define('my-counter');
     </script>
-    <div itemscope=my-counter be-scoped='{
-            "count": 30
-        }'
-        be-sharing='
-            ^ count from scope.
-    '>
-        <span itemprop="count"></span>
-    </div>
+    <section be-sharing>
+        <div itemscope=my-counter>
+            <span itemprop="count"></span>
+        </div>
+    </section>
+
     <script type=importmap>
         {
             "imports": {
