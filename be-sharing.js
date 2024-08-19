@@ -34,14 +34,16 @@ class BeSharing extends BE {
      */
     async attach(enhancedElement, enhancementInfo) {
         super.attach(enhancedElement, enhancementInfo);
-        debugger;
+        
         const beGingerly = await
         /** @type {any} */ 
         (enhancedElement).beEnhanced.whenResolved(emc);
         const mo = new MountObserver({
-            on: '[itemscope*="-"] [itemprop]',
+            on: '[itemscope]',
             do: {
-
+                mount: (matchingElement) => {
+                    
+                }
             }
         });
     }
