@@ -41,7 +41,7 @@ What this does:
 oTR.ish = oMedalCountInstance 
 ```
 
-If no parent itemscope attributed element is found that is either a custom element instance or that specifies a custom element name as above, then it will bind from the host.
+If no parent itemscope attributed element is found that is either a custom element instance or that specifies a custom element name as above, then it will bind from the ShadowDOM root host.
 
 
 > [!Note]
